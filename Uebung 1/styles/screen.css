@@ -1,0 +1,110 @@
+* {
+	font-family: Arial, sans-serif;
+	font-size: 16px;
+}
+
+body {
+	background-image:url("../img/style1-background.png");
+	background-size: cover;
+	background-attachment: fixed;	
+	margin: 0px;
+	color: #FFFFFF;
+}
+
+header {
+	height: 38px;
+	background: #033058 url("../img/big-logo-small.png") no-repeat;
+	background-position: 15px 5px;
+	margin: 0px;
+	padding: 10px 20px 10px 80px;
+	font-weight: bold;
+	font-size:28px;
+}
+
+header button {	
+	background: #F29400;
+	float: right;
+	margin-top: 5px;
+	padding: 2px 30px;	
+	border: 1px solid #C37700;
+	border-radius: 5px;
+	color: #FFFFFF;
+	font-weight: bold;
+	font-size: 15px;
+}
+
+form{
+	  width: 417px; 
+	  height: 480px;   
+	  padding-top: 30px;
+	  padding-right: 0px;
+	  margin: auto;
+}
+
+form button{
+	background: #36D344 url("../img/white-arrow-right.png") no-repeat;
+	background-position: 90% 50%;
+	width: 170px;
+	height: 30px;
+	clear: both;
+	float: right;
+	margin-top: -25px;
+	text-align: left;
+	padding-left: 25px;
+	border: 1px solid #116D01;
+	border-radius: 5px;
+	color: #FFFFFF;
+	font-weight: bold;
+	font-size: 15px;
+}
+
+form button:disabled{
+	background-color:#CCCCCC;
+}
+
+form footer{
+	padding-top: 5px;
+	font-size: 14px;
+	clear: both;
+	text-align: center;	
+	color: #FFFFFF;
+}
+
+fieldset {
+	border: 0px;
+	padding: 0px;
+	margin: 0px;
+}
+
+fieldset legend {
+	font-weight: bold;
+	font-size: 20px;
+	margin-bottom: 5px;
+}
+
+fieldset label  {
+	font-size: 15px;
+	width: 165px;
+	float: left;
+}
+
+fieldset input{
+	width: 240px;
+	height: 23px;
+	padding: 2px 5px 2px 5px;
+	border: 1px solid #03345F;
+	border-radius: 3px;
+}
+
+fieldset select {
+   width: 252px;
+   height: 30px;
+   padding: 3.5px 5px 2px 5px;
+   border: 1px solid #03345F;
+   border-radius: 2px;  
+}
+
+footer {
+	font-size: 15px;
+	text-align: center;
+}
