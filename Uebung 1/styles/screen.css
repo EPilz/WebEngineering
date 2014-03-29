@@ -142,9 +142,9 @@ header button {
 	color: #133058;
 }
 
-.marked {
-	background-color: yellow;
-	border: 3px red solid;
+.formFrage section .marked {
+	color: #e6ffff;
+	background-color: #033058;
 }
 
 footer {
