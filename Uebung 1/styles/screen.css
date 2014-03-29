@@ -34,7 +34,7 @@ header button {
 }
 
 .formRegister {
-	  width: 417px; 
+	  width: 420px; 
 	  height: 500px;   
 	  padding-top: 30px;
 	  padding-right: 0px;
@@ -125,7 +125,6 @@ header button {
 }
 
 .formFrage section {
-
 	-webkit-column-count:2;  
 	-moz-column-count:2; 
 	column-count:2;	
@@ -134,12 +133,18 @@ header button {
 .formFrage section input {
 	float: left;
 	width: 100%;
+	min-width: 220px;
 	height: 50px;
 	margin: 5px 5px;
 	background: #B9D6F0;
 	border: 0px;
 	border-radius: 5px;  
 	color: #133058;
+}
+
+.marked {
+	background-color: yellow;
+	border: 3px red solid;
 }
 
 footer {
@@ -175,6 +180,12 @@ footer {
 	.formRegister  footer{
 		padding-top: 2.5px;
 	}
+	.formFrage section {
+		-webkit-column-count:1;  
+		-moz-column-count:1; 
+		column-count:1;	
+	}
+	
 	footer {
 		padding-top: 12%;
 	}

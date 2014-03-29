@@ -1,3 +1,13 @@
+<!DOCTYPE html>
+<script src="js/framework.js" type="text/javascript" ></script>
+<script src="js/jquery.js" type="text/javascript" ></script>
+
+<script type="text/javascript">
+	function f1() {
+		<!-- funktinoiert nicht -->
+		var i = $("#ant1").addClass("marked");
+	}
+</script>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
 	<head>
 		<link rel="stylesheet" type="text/css" href="styles/screen.css">
@@ -12,10 +22,10 @@
 		<form id=frage class="formFrage">		
 			<label id="frage"> Welche zwei LVAs werden im Modul EWA zusammengefasst?</label>
 			<section id="antworten">		
-					<input type="button" id="name" value="IT Strategie"/>
-					<input type="button" id="name" value="Web Engineering"/>
-					<input type="button" id="name" value="Semistrukturierte Daten"/>
-					<input type="button" id="name" value="Objektorientierte Modellierung"/>
+					<input type="button" id="ant1" value="IT Strategie" onclick="f1()"/>
+					<input type="button" id="ant2" value="Web Engineering"/>
+					<input type="button" id="ant3" value="Semistrukturierte Daten"/>
+					<input type="button" id="ant4" value="Objektorientierte Modellierung"/>
 			</section>
 		</form>
 		<footer>  

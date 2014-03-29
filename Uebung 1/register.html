@@ -19,18 +19,12 @@
 		user = document.getElementById('benutzername');
 		passwort = document.getElementById('passwort');
 		invalid = false;
-		if(user.value.length < 4 || user.value.length > 8) {
-			user.style.border = "2px solid red";
+		if(user.value.length < 4 || user.value.length > 8) {	
 			invalid = true;
-		} else {
-			user.style.border = "1px solid #03345F";
 		}
-		if(passwort.value.length < 4 || passwort.value.length > 8) {
-			passwort.style.border = "2 solid red";
+		if(passwort.value.length < 4 || passwort.value.length > 8) {			
 			invalid = true;
-		} else {
-			passwort.style.border = "1px solid #03345F";
-		}
+		} 
 		if(invalid) {
 			document.getElementById('registrieren').disabled = true;
 		} else {
@@ -79,14 +73,16 @@
 				<p> 
 					<label for="benutzername">Benutzername*:</label> 
 					<input type="text" id="benutzername" name="benutzername" 
-						onblur='return checkInput()'
+						onChange='return checkInput()'
+						required="required"
 						pattern='.{4,8}' /> 
 				</p> 
 				<p> 
 					<label for="passwort">Passwort*:</label> 
 					<input type="password" id="passwort" name="passwort" 
-					onblur='return checkInput()'
-					/> 
+					onChange='return checkInput()'		
+					required="required"
+					pattern='.{4,8}'/> 
 				</p> 	
 				
 			</fieldset>
