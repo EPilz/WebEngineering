@@ -35,7 +35,7 @@ header button {
 
 form{
 	  width: 417px; 
-	  height: 480px;   
+	  height: 500px;   
 	  padding-top: 30px;
 	  padding-right: 0px;
 	  margin: auto;
@@ -79,6 +79,7 @@ fieldset {
 fieldset legend {
 	font-weight: bold;
 	font-size: 20px;
+	color: #FFFFFF;
 	margin-bottom: 5px;
 }
 
@@ -107,4 +108,36 @@ fieldset select {
 footer {
 	font-size: 15px;
 	text-align: center;
+}
+
+input:invalid {
+  border: 1px solid red;
+}
+
+@media screen and (max-width: 32em) {
+	header button {	
+		padding: 5px;	
+	}
+	fieldset  p{
+		margin-top: 0px;
+	}
+	fieldset legend {
+		font-size: 18px;
+	}
+	fieldset input {
+		width: 96%;
+	}
+	fieldset select {
+	   width: 99%;
+	   margin-bottom: 15px;
+	}
+	form button{
+		 margin-right: 2px;
+	}
+	form footer{
+		padding-top: 2.5px;
+	}
+	footer {
+		padding-top: 12%;
+	}
 }

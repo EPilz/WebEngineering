@@ -1,4 +1,30 @@
 <!DOCTYPE html>
+
+<script src="js/framework.js" type="text/javascript" ></script>
+<script src="js/jquery.js" type="text/javascript" ></script>
+
+<script type="text/javascript">
+	function checkForm() {
+		if(hasNativeDateInput() || hasFormValidation()) {
+			alert("if");
+		} else {
+			alert("else");
+		}
+		
+		<!-- document.getElementById('registrieren').disabled = false; -->
+		return(true);
+	}
+	
+	function checkInput() {
+		value = $("#passwort").val();
+		if($("#passwort").val() == "" || $("#benutzername").val() == "") {
+			document.getElementById('registrieren').disabled = true;
+		} else {
+			document.getElementById('registrieren').disabled = false;
+		}
+	}
+	
+</script>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
 	<head>
 		<link rel="stylesheet" type="text/css" href="styles/screen.css">
@@ -11,7 +37,7 @@
 			<button id="anmelden">Anmelden</button>
 		</header>
 		
-		<form id="formRegistrieren">
+		<form id="formRegistrieren" >
 			<fieldset>
 				<legend>Persönliche Daten</legend>
 				<p> 
@@ -23,8 +49,8 @@
 					<input type="text" id="nachname" name="nachname" /> 
 				</p> 
 				<p> 
-					<label for="geburtstag">Geburtstag:</label> 
-					<input type="text" id="geburtstag" name="geburtstag" />
+					<label for="document.getElementById('registrieren')">Geburtstag:</label> 
+					<input type="date" id="geburtstag" name="geburtstag" onblur='return checkForm()'/>
 				</p> 
 				<p> 
 					<label for="geschlecht">Geschlecht:</label> 
@@ -38,16 +64,21 @@
 				<legend>Login Daten</legend>
 				<p> 
 					<label for="benutzername">Benutzername*:</label> 
-					<input type="text" id="benutzername" name="benutzername" /> 
+					<input type="text" id="benutzername" name="benutzername" 
+						onblur='return checkInput()'
+						pattern='[\d\w]{4,8}'
+						title="Username muss zwischen 4-8 Zeichen haben" /> 
 				</p> 
 				<p> 
 					<label for="passwort">Passwort*:</label> 
-					<input type="text" id="passwort" name="passwort" /> 
+					<input type="password" id="passwort" name="passwort" 
+					onblur='return checkInput()'
+					/> 
 				</p> 	
 				
 			</fieldset>
 			<p>
-				<button disabled id="registrieren" >Registrieren</button>
+				<button disabled type="submit" id="registrieren" >Registrieren</button> <!-- required="required" disabled -->
 			</p>
 			<footer>
 				<p>Mit "*" gekennzeichnete Felder sind Pflichtfelder.</p>
