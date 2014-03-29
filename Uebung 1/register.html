@@ -20,13 +20,13 @@
 		passwort = document.getElementById('passwort');
 		invalid = false;
 		if(user.value.length < 4 || user.value.length > 8) {
-			user.style.border = "1px solid red";
+			user.style.border = "2px solid red";
 			invalid = true;
 		} else {
 			user.style.border = "1px solid #03345F";
 		}
 		if(passwort.value.length < 4 || passwort.value.length > 8) {
-			passwort.style.border = "1.5px solid red";
+			passwort.style.border = "2 solid red";
 			invalid = true;
 		} else {
 			passwort.style.border = "1px solid #03345F";
@@ -51,7 +51,7 @@
 			<button id="anmelden">Anmelden</button>
 		</header>
 		
-		<form id="formRegistrieren" >
+		<form id="formRegistrieren" class="formRegister">
 			<fieldset>
 				<legend>Persönliche Daten</legend>
 				<p> 

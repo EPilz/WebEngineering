@@ -35,7 +35,7 @@ header button {
 	font-size: 15px;
 }
 
-form{
+.formRegister {
 	  width: 417px; 
 	  height: 500px;   
 	  padding-top: 30px;
@@ -43,7 +43,7 @@ form{
 	  margin: auto;
 }
 
-form button{
+.formRegister  button{
 	background: #36D344 url("../img/white-arrow-right.png") no-repeat;
 	background-position: 90% 50%;
 	width: 170px;
@@ -61,11 +61,11 @@ form button{
 	font-size: 15px;
 }
 
-form button:disabled{
+.formRegister  button:disabled{
 	background-color:#CCCCCC;
 }
 
-form footer{
+.formRegister  footer{
 	padding-top: 5px;
 	font-size: 14px;
 	clear: both;
@@ -73,25 +73,25 @@ form footer{
 	color: #FFFFFF;
 }
 
-fieldset {
+.formRegister  fieldset {
 	border: 0px;
 	margin-bottom: 10px;
 }
 
-fieldset legend {
+.formRegister  fieldset legend {
 	font-weight: bold;
 	font-size: 20px;
 	color: #FFFFFF;
 	margin-bottom: 25px;
 }
 
-fieldset label  {
+.formRegister  fieldset label  {
 	font-size: 15px;
 	width: 165px;
 	float: left;
 }
 
-fieldset input{
+.formRegister  fieldset input{
 	width: 240px;
 	height: 23px;
 	margin-bottom: 15px;
@@ -100,7 +100,7 @@ fieldset input{
 	border-radius: 3px;
 }
 
-fieldset select {
+.formRegister  fieldset select {
    width: 252px;
    height: 30px;
    margin-bottom: 10px;
@@ -109,7 +109,44 @@ fieldset select {
    border-radius: 2px;  
 }
 
+.formFrage {
+	  width: 80%; 
+	  margin: auto;
+	  padding-top: 20px;	  
+	  padding-bottom: 50px;
+}
+
+.formFrage label{
+	color: #FFFFFF;
+	font-size: 20px;
+	display: inline-block;
+	margin: auto;
+	padding-bottom: 20px;
+}
+
+.formFrage section {
+	display: inline-block;
+}
+
+.formFrage section input {
+	float: left;
+	width: 300px;
+	height: 50px;
+}
+
+.formFrage section input {
+	float: left;
+	width: 300px;
+	height: 50px;
+	margin: 5px 5px;
+	background: #B9D6F0;
+	border: 0px;
+	border-radius: 5px;  
+	color: #133058;
+}
+
 footer {
+	clear: both;
 	font-size: 15px;
 	text-align: center;
 }
@@ -119,23 +156,26 @@ footer {
 	header button {	
 		padding: 5px;	
 	}
-	fieldset  p{
-		margin-top: 0px;
+	
+	.formRegister  {
+	  padding-top: 18px;
+	 }
+
+	.formRegister  fieldset legend {
+		font-size: 16px;
+		margin-bottom: 10px;
 	}
-	fieldset legend {
-		font-size: 18px;
-	}
-	fieldset input {
+	.formRegister  fieldset input {
 		width: 96%;
 	}
-	fieldset select {
+	.formRegister  fieldset select {
 	   width: 99%;
 	   margin-bottom: 15px;
 	}
-	form button{
+	.formRegister  button{
 		 margin-right: 2px;
 	}
-	form footer{
+	.formRegister  footer{
 		padding-top: 2.5px;
 	}
 	footer {
