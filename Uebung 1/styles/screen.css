@@ -1,6 +1,8 @@
 * {
 	font-family: Arial, sans-serif;
 	font-size: 16px;
+	padding: 0px;
+	margin: 0px;
 }
 
 body {
@@ -48,7 +50,8 @@ form button{
 	height: 30px;
 	clear: both;
 	float: right;
-	margin-top: -25px;
+	margin-top: -15px;
+	margin-bottom: 10px;
 	text-align: left;
 	padding-left: 25px;
 	border: 1px solid #116D01;
@@ -72,15 +75,14 @@ form footer{
 
 fieldset {
 	border: 0px;
-	padding: 0px;
-	margin: 0px;
+	margin-bottom: 10px;
 }
 
 fieldset legend {
 	font-weight: bold;
 	font-size: 20px;
 	color: #FFFFFF;
-	margin-bottom: 5px;
+	margin-bottom: 25px;
 }
 
 fieldset label  {
@@ -92,6 +94,7 @@ fieldset label  {
 fieldset input{
 	width: 240px;
 	height: 23px;
+	margin-bottom: 15px;
 	padding: 2px 5px 2px 5px;
 	border: 1px solid #03345F;
 	border-radius: 3px;
@@ -100,6 +103,7 @@ fieldset input{
 fieldset select {
    width: 252px;
    height: 30px;
+   margin-bottom: 10px;
    padding: 3.5px 5px 2px 5px;
    border: 1px solid #03345F;
    border-radius: 2px;  
@@ -110,11 +114,8 @@ footer {
 	text-align: center;
 }
 
-input:invalid {
-  border: 1px solid red;
-}
-
 @media screen and (max-width: 32em) {
+	
 	header button {	
 		padding: 5px;	
 	}

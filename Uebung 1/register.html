@@ -16,8 +16,22 @@
 	}
 	
 	function checkInput() {
-		value = $("#passwort").val();
-		if($("#passwort").val() == "" || $("#benutzername").val() == "") {
+		user = document.getElementById('benutzername');
+		passwort = document.getElementById('passwort');
+		invalid = false;
+		if(user.value.length < 4 || user.value.length > 8) {
+			user.style.border = "1px solid red";
+			invalid = true;
+		} else {
+			user.style.border = "1px solid #03345F";
+		}
+		if(passwort.value.length < 4 || passwort.value.length > 8) {
+			passwort.style.border = "1.5px solid red";
+			invalid = true;
+		} else {
+			passwort.style.border = "1px solid #03345F";
+		}
+		if(invalid) {
 			document.getElementById('registrieren').disabled = true;
 		} else {
 			document.getElementById('registrieren').disabled = false;
@@ -27,7 +41,7 @@
 </script>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
 	<head>
-		<link rel="stylesheet" type="text/css" href="styles/screen.css">
+		<link rel="stylesheet" type="text/css" media="screen, projection, handheld" href="styles/screen.css">
 		<meta charset="utf-8">
 		<title xml:lang="en" lang="en">Business Informatics Group Quiz - Registration</title>
 	</head>
@@ -66,8 +80,7 @@
 					<label for="benutzername">Benutzername*:</label> 
 					<input type="text" id="benutzername" name="benutzername" 
 						onblur='return checkInput()'
-						pattern='[\d\w]{4,8}'
-						title="Username muss zwischen 4-8 Zeichen haben" /> 
+						pattern='.{4,8}' /> 
 				</p> 
 				<p> 
 					<label for="passwort">Passwort*:</label> 
@@ -78,7 +91,7 @@
 				
 			</fieldset>
 			<p>
-				<button disabled type="submit" id="registrieren" >Registrieren</button> <!-- required="required" disabled -->
+				<button type="submit" id="registrieren" disabled="disabled">Registrieren</button> <!-- required="required" disabled -->
 			</p>
 			<footer>
 				<p>Mit "*" gekennzeichnete Felder sind Pflichtfelder.</p>
