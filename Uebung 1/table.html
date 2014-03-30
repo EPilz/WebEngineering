@@ -33,12 +33,19 @@
 	
 			function marked(id) {
 				var element = document.getElementById(id);
-				if(element.classList.hasClass("marked")) {
+				if(hasClass(element, "marked")) {
 					element.classList.remove("marked");		
 				} else {
 					element.classList.add("marked");
 				}
-			};			
+			};
+	
+			function hasClass(element, classTo ) {
+				return (" " + element.className + " ").indexOf(" " + classTo + " ") > -1;
+			};
+
+
+				
 		</script>
 	</head>
 	<body>
