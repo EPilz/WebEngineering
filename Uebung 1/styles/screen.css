@@ -111,14 +111,13 @@ header button {
 	width: 80%;
 	margin: 0 auto;
 	padding-top: 20px;
-	top: 0;
 }
 
 .formWertung  p {
 	text-align: center;
 	font-weight: bold;
-	font-size: 13px;
-	padding: 0px;
+	font-size: 12px;
+	padding-bottom: 4px;
 }
 
 .formWertung section {
@@ -137,10 +136,7 @@ header button {
 	padding-left: 2px;
 }
 
-.formWertung section div img{
-	width: 17px;
-	height: 16px;
-}
+
 
 .formWertung  h1{
 	text-align: center;
@@ -148,15 +144,11 @@ header button {
 	font-size: 20px;
 }
 
-
-
 .formFrage {	
 	clear: both;
     width: 80%;
 	margin: 0 auto;
 	padding-top: 20px;	  
-	padding-bottom: 50px;
-	
 }
 
 .formFrage label{
@@ -190,6 +182,80 @@ header button {
 .formFrage section .marked {
 	color: #e6ffff;
 	background-color: #033058;
+}
+
+.formStatus  {	
+	width: 80%;
+	margin: 5px auto;
+}
+
+.formStatus section {	
+	margin: 0px;
+	width: 50%;
+	float: left;
+}
+
+.formStatus section section{
+	margin: 0px;
+	width: 100%;
+	float: right;
+}
+
+.formStatus section label{	
+	font-size: 14px;
+}
+
+.formStatus section progress {	
+	width: 100%;
+    border: 0;  
+    height: 20px;  
+    border-radius: 0px;  
+	color: #77AA33;
+	background: linear-gradient(to bottom, #ECECEC, #CCCCCC);
+}
+
+.formStatus section  progress::-webkit-progress-bar {
+    background: #CCCCCC;
+	background: -webkit-linear-gradient(to bottom, #ECECEC, #CCCCCC);
+	background: linear-gradient(to bottom, #ECECEC, #CCCCCC);
+	border-radius: 0px;
+}
+.formStatus section  progress::-webkit-progress-value {
+	background: #77AA33;
+	background: -webkit-linear-gradient(to bottom, #C5E8A1, #77AA33);
+	background: linear-gradient(to bottom, #C5E8A1, #77AA33);
+	border-radius: 0px;
+}
+.formStatus section  progress::-moz-progress-bar {
+	background: #77AA33;
+	background: -moz-linear-gradient(to bottom, #C5E8A1, #77AA33);
+	background: linear-gradient(to bottom, #C5E8A1, #77AA33);
+	border-radius: 0px;
+}
+
+.formStatus footer{
+	text-align: left;
+	font-size: 12px;
+	padding-top: 20px;
+	margin-bottom: 40px;
+}
+
+.formStatus  button{
+	background: #36D344 url("../img/white-arrow-right.png") no-repeat;
+	background-position: 90% 50%;
+	width: 120px;
+	height: 28px;
+	clear: both;
+	float: right;
+	margin-right: -5px;
+	margin-bottom: 10px;
+	text-align: left;
+	padding-left: 25px;
+	border: 1px solid #116D01;
+	border-radius: 5px;
+	color: #FFFFFF;
+	font-weight: bold;
+	font-size: 15px;
 }
 
 footer {
@@ -230,12 +296,29 @@ footer {
 		-moz-column-count:1; 
 		column-count:1;	
 	}
-	
 	.formWertung  h1{
 		padding-top: 45px;
 	}
-
+	.formStatus section {
+		width: 100%;
+	}
 	
+	.formStatus  button {
+		width: 100%;
+		background-position: 98% 50%;
+		text-align: center;
+		margin-top: -40px;
+	}
+	
+	.formStatus section label{	
+		margin-top: 200px;
+	}
+
+	.formStatus section progress{
+		margin-top: -100px;
+		color: red;
+	}
+
 	footer {
 		padding-top: 12%;
 	}
