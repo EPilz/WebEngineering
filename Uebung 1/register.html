@@ -1,43 +1,72 @@
 <!DOCTYPE html>
-
-<script src="js/framework.js" type="text/javascript" ></script>
-<script src="js/jquery.js" type="text/javascript" ></script>
-
-<script type="text/javascript">
-	function checkForm() {
-		if(hasNativeDateInput() || hasFormValidation()) {
-			alert("if");
-		} else {
-			alert("else");
-		}
-		
-		<!-- document.getElementById('registrieren').disabled = false; -->
-		return(true);
-	}
-	
-	function checkInput() {
-		user = document.getElementById("benutzername");
-		passwort = document.getElementById("passwort");
-		invalid = false;
-		if(user.value.length < 4 || user.value.length > 8) {	
-			invalid = true;
-		}
-		if(passwort.value.length < 4 || passwort.value.length > 8) {			
-			invalid = true;
-		} 
-		if(invalid) {
-			document.getElementById('registrieren').disabled = true;
-		} else {
-			document.getElementById('registrieren').disabled = false;
-		}
-	}
-	
-</script>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
 	<head>
 		<link rel="stylesheet" type="text/css" media="screen, projection, handheld" href="styles/screen.css">
 		<meta charset="utf-8">
 		<title xml:lang="en" lang="en">Business Informatics Group Quiz - Registration</title>
+		<script src="js/framework.js" type="text/javascript" ></script>
+		<script src="js/jquery.js" type="text/javascript" ></script>
+
+		<script type="text/javascript">
+			function isValidDate(s) {
+				var dateFormat = /^(\d{1,2})\.(\d{1,2})\.(\d{4})$/;
+				if (dateFormat.test(s)) {
+					s = s.replace(/0*(\d*)/gi,"$1");
+					var dateArray = s.split(/[\.|\/|-]/);
+					// correct month value
+					dateArray[1] = dateArray[1]-1;
+					// correct year value
+					if (dateArray[2].length<4) {
+						// correct year value
+						dateArray[2] = (parseInt(dateArray[2]) < 50) ? 2000 + parseInt(dateArray[2]) : 1900 + parseInt(dateArray[2]);
+					}
+					var testDate = new Date(dateArray[2], dateArray[1], dateArray[0]);
+					if (testDate.getDate()!=dateArray[0] || testDate.getMonth()!=dateArray[1] || testDate.getFullYear()!=dateArray[2]) {
+						return false;
+					} else {
+						return true;
+					}
+				} else {
+					return false;
+				}
+			}
+			
+			function checkInput(id) {
+				user = document.getElementById("benutzername");
+				passwort = document.getElementById("passwort");
+				geburtstag = document.getElementById("geburtstag");
+				invalid = false;
+				if(user.value.length < 4 || user.value.length > 8) {	
+					invalid = true;
+					if(id == "benutzername") {
+						user.classList.add("invalid");	
+					}
+				} else {
+					user.classList.remove("invalid");	
+				}
+				if(passwort.value.length < 4 || passwort.value.length > 8) {			
+					invalid = true;
+					if(id == "passwort") {
+						passwort.classList.add("invalid");	
+					} 
+				} else {
+					passwort.classList.remove("invalid");	
+				}
+				if(!isValidDate(getNormalizedDateString("#geburtstag")) && geburtstag.value.length > 0) {
+					invalid = true;
+					if(id == "geburtstag") {
+						geburtstag.classList.add("invalid");	
+					}
+				} else {
+					geburtstag.classList.remove("invalid");
+				}
+				if(invalid) {
+					document.getElementById('registrieren').disabled = true;
+				} else {
+					document.getElementById('registrieren').disabled = false;
+				}
+			}		
+		</script>
 	</head>
 	<body>
 		<header>
@@ -57,8 +86,8 @@
 					<input type="text" id="nachname" name="nachname" /> 
 				</p> 
 				<p> 
-					<label for="document.getElementById('registrieren')">Geburtstag:</label> 
-					<input type="date" id="geburtstag" name="geburtstag" onblur='return checkForm()'/>
+					<label for="geburtstag">Geburtstag:</label> 
+					<input type="date" id="geburtstag" name="geburtstag" onblur='checkInput(this.id)' title="Format: dd.mm.yyyy"/>
 				</p> 
 				<p> 
 					<label for="geschlecht">Geschlecht:</label> 
@@ -72,17 +101,11 @@
 				<legend>Login Daten</legend>
 				<p> 
 					<label for="benutzername">Benutzername*:</label> 
-					<input type="text" id="benutzername" name="benutzername" 
-						onChange='return checkInput()'
-						required="required"
-						pattern='.{4,8}' /> 
+					<input type="text" id="benutzername" name="benutzername" onChange='checkInput(this.id)' title="Pflichtfeld (zwischen 4 und 8 Zeichen)"/> 
 				</p> 
 				<p> 
 					<label for="passwort">Passwort*:</label> 
-					<input type="password" id="passwort" name="passwort" 
-					onChange='return checkInput()'		
-					required="required"
-					pattern='.{4,8}'/> 
+					<input type="password" id="passwort" name="passwort" onChange='checkInput(this.id)' title="Pflichtfeld (zwischen 4 und 8 Zeichen)"/> 
 				</p> 	
 				
 			</fieldset>

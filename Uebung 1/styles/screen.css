@@ -98,6 +98,11 @@ header button {
 	border-radius: 3px;
 }
 
+.formRegister  .invalid {
+	border: 2px solid red;
+}
+
+
 .formRegister  fieldset select {
    width: 252px;
    height: 30px;
