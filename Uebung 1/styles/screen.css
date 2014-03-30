@@ -107,7 +107,51 @@ header button {
    border-radius: 2px;  
 }
 
-.formFrage {
+.formWertung  {
+	width: 80%;
+	margin: 0 auto;
+	padding-top: 20px;
+	top: 0;
+}
+
+.formWertung  p {
+	text-align: center;
+	font-weight: bold;
+	font-size: 13px;
+	padding: 0px;
+}
+
+.formWertung section {
+	margin: 0px;
+	width: 33%;
+	float: left;
+}
+
+.divRight {
+	float: right;
+}
+
+.formWertung section div{
+	width: 80px;
+	text-align: center;
+	padding-left: 2px;
+}
+
+.formWertung section div img{
+	width: 17px;
+	height: 16px;
+}
+
+.formWertung  h1{
+	text-align: center;
+	font-weight: bold;
+	font-size: 20px;
+}
+
+
+
+.formFrage {	
+	clear: both;
     width: 80%;
 	margin: 0 auto;
 	padding-top: 20px;	  
@@ -116,10 +160,11 @@ header button {
 }
 
 .formFrage label{
+	display: block;
+    text-align: center;
 	width: 100%;
 	color: #FFFFFF;
 	font-size: 20px;
-	display: inline-block;
 	margin: 0 auto;
 	padding-bottom: 20px;
 }
@@ -185,6 +230,11 @@ footer {
 		-moz-column-count:1; 
 		column-count:1;	
 	}
+	
+	.formWertung  h1{
+		padding-top: 45px;
+	}
+
 	
 	footer {
 		padding-top: 12%;

@@ -15,11 +15,37 @@
 		<title xml:lang="en" lang="en">Business Informatics Group Quiz - Registration</title>
 	</head>
 	<body>
+		
 		<header>
 			 Quiz
 			<button id="abmelden">Abmelden</button>
 		</header>
-		<form id=frage class="formFrage">		
+		<form id="formWertung" class="formWertung"> 
+			<section id="imgSpieler1">
+				<div>
+					<p>Spieler 1</p>
+					<div id="imgSpieler1">
+						<img id="img1_Spieler1" src="img/correct-white.png" >
+						<img id="img2_Spieler1" src="img/incorrect-white.png" >
+						<img id="img3_Spieler1" src="img/unknown-white.png" >
+					</div>
+				</div>
+			</section>		
+			<section>
+				<h1>EWA</h1>
+			</section>
+			<section id="imgSpieler2">		
+				<div class="divRight">
+					<p>Spieler 2</p>
+					<div id="imgSpieler2">
+						<img id="img1_Spieler2" src="img/correct-white.png" >
+						<img id="img2_Spieler2" src="img/correct-white.png" >
+						<img id="img3_Spieler2" src="img/unknown-white.png"  >
+					</div>
+				</div>
+			</section>	
+		</form>
+		<form id="frageFrage" class="formFrage">			
 			<label id="frage"> Welche zwei LVAs werden im Modul EWA zusammengefasst?</label>
 			<section id="antworten">		
 					<input type="button" id="ant1" value="IT Strategie" onclick="marked(this.id)"/>
