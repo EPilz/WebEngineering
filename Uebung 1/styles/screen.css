@@ -34,7 +34,7 @@ header button {
 }
 
 .formRegister {
-	  width: 417px; 
+	  width: 420px; 
 	  height: 500px;   
 	  padding-top: 30px;
 	  padding-right: 0px;
@@ -107,7 +107,51 @@ header button {
    border-radius: 2px;  
 }
 
-.formFrage {
+.formWertung  {
+	width: 80%;
+	margin: 0 auto;
+	padding-top: 20px;
+	top: 0;
+}
+
+.formWertung  p {
+	text-align: center;
+	font-weight: bold;
+	font-size: 13px;
+	padding: 0px;
+}
+
+.formWertung section {
+	margin: 0px;
+	width: 33%;
+	float: left;
+}
+
+.divRight {
+	float: right;
+}
+
+.formWertung section div{
+	width: 80px;
+	text-align: center;
+	padding-left: 2px;
+}
+
+.formWertung section div img{
+	width: 17px;
+	height: 16px;
+}
+
+.formWertung  h1{
+	text-align: center;
+	font-weight: bold;
+	font-size: 20px;
+}
+
+
+
+.formFrage {	
+	clear: both;
     width: 80%;
 	margin: 0 auto;
 	padding-top: 20px;	  
@@ -116,16 +160,16 @@ header button {
 }
 
 .formFrage label{
+	display: block;
+    text-align: center;
 	width: 100%;
 	color: #FFFFFF;
 	font-size: 20px;
-	display: inline-block;
 	margin: 0 auto;
 	padding-bottom: 20px;
 }
 
 .formFrage section {
-
 	-webkit-column-count:2;  
 	-moz-column-count:2; 
 	column-count:2;	
@@ -134,12 +178,18 @@ header button {
 .formFrage section input {
 	float: left;
 	width: 100%;
+	min-width: 220px;
 	height: 50px;
 	margin: 5px 5px;
 	background: #B9D6F0;
 	border: 0px;
 	border-radius: 5px;  
 	color: #133058;
+}
+
+.formFrage section .marked {
+	color: #e6ffff;
+	background-color: #033058;
 }
 
 footer {
@@ -175,6 +225,17 @@ footer {
 	.formRegister  footer{
 		padding-top: 2.5px;
 	}
+	.formFrage section {
+		-webkit-column-count:1;  
+		-moz-column-count:1; 
+		column-count:1;	
+	}
+	
+	.formWertung  h1{
+		padding-top: 45px;
+	}
+
+	
 	footer {
 		padding-top: 12%;
 	}
