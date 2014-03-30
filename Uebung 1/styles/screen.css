@@ -116,7 +116,7 @@ header button {
 .formWertung  p {
 	text-align: center;
 	font-weight: bold;
-	font-size: 12px;
+	font-size: 13px;
 	padding-bottom: 4px;
 }
 
@@ -135,8 +135,6 @@ header button {
 	text-align: center;
 	padding-left: 2px;
 }
-
-
 
 .formWertung  h1{
 	text-align: center;
@@ -236,8 +234,8 @@ header button {
 .formStatus footer{
 	text-align: left;
 	font-size: 12px;
-	padding-top: 20px;
-	margin-bottom: 40px;
+	padding-top: 15px;
+	margin-bottom: 50px;
 }
 
 .formStatus  button{
@@ -260,11 +258,11 @@ header button {
 
 footer {
 	clear: both;
-	font-size: 15px;
+	font-size: 13px;
 	text-align: center;
 }
 
-@media screen and (max-width: 32em) {
+@media screen and (max-width: 34em) {
 	
 	header button {	
 		padding: 5px;	
@@ -300,23 +298,23 @@ footer {
 		padding-top: 45px;
 	}
 	.formStatus section {
-		width: 100%;
+		width: 100%;		
 	}
 	
 	.formStatus  button {
 		width: 100%;
 		background-position: 98% 50%;
 		text-align: center;
-		margin-top: -40px;
+		margin-top: -80px;
 	}
 	
-	.formStatus section label{	
-		margin-top: 200px;
+	.formStatus section div{	
+		margin-top: 40px;
 	}
-
-	.formStatus section progress{
-		margin-top: -100px;
-		color: red;
+	
+	.formStatus footer{
+	
+		margin-bottom: -20px;
 	}
 
 	footer {

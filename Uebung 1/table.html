@@ -1,46 +1,45 @@
 <!DOCTYPE html>
-<script src="js/framework.js" type="text/javascript" ></script>
-<script src="js/jquery.js" type="text/javascript" ></script>
-
-<script type="text/javascript">
-	$(document).ready(function() {
-		var progressbar = $('#progressbar'),	
-			max = progressbar.attr('max'),
-			time = 1000,	
-			value = progressbar.val();
-
-		var loading = function() {					
-			value += 1;
-			sec = max - value;		
-			if (value > max) {
-				value = 0;
-				sec = max;
-			}
-			$('.progress-value').html(value + '%');	
-			addValue = progressbar.val(value);
-			$('#zeitLabel').html("Verbleibende Zeit: 00:" + sec);
-		};
-
-		var animate = setInterval(function() {
-			loading();
-		}, time);
-			
-	});
-	
-	
-	function marked(id) {
-		var element = document.getElementById(id);
-		element.classList.add("marked");
-	};
-	
-	
-	
-</script>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
 	<head>
-		<link rel="stylesheet" type="text/css" href="styles/screen.css">
-		<meta charset="utf-8">
+		<link rel="stylesheet" type="text/css" href="styles/screen.css"/>
+		<meta charset="utf-8"/>
 		<title xml:lang="en" lang="en">Business Informatics Group Quiz - Registration</title>
+		<script src="js/framework.js" type="text/javascript" ></script>
+		<script src="js/jquery.js" type="text/javascript" ></script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				var progressbar = $('#progressbar'),	
+					max = progressbar.attr('max'),
+					time = 1000,	
+					value = progressbar.val();
+
+				var loading = function() {					
+					value += 1;
+					sec = max - value;		
+					if (value > max) {
+						value = 0;
+						sec = max;
+					}
+					$('.progress-value').html(value + '%');	
+					addValue = progressbar.val(value);
+					$('#zeitLabel').html("Verbleibende Zeit: 00:" + sec);
+				};
+
+				var animate = setInterval(function() {
+					loading();
+				}, time);
+					
+			});
+	
+			function marked(id) {
+				var element = document.getElementById(id);
+				if(element.classList.hasClass("marked")) {
+					element.classList.remove("marked");		
+				} else {
+					element.classList.add("marked");
+				}
+			};			
+		</script>
 	</head>
 	<body>
 		
@@ -49,26 +48,26 @@
 			<button id="abmelden">Abmelden</button>
 		</header>
 		<form id="formWertung" class="formWertung"> 
-			<section id="imgSpieler1">
+			<section id="section_imgSpieler1">
 				<div>
 					<p>Spieler 1</p>
 					<div id="imgSpieler1">
-						<img id="img1_Spieler1" src="img/correct-white.png" >
-						<img id="img2_Spieler1" src="img/incorrect-white.png" >
-						<img id="img3_Spieler1" src="img/unknown-white.png" >
+						<img id="img1_Spieler1" src="img/correct-white.png" alt="Spieler 1 Korrekt">
+						<img id="img2_Spieler1" src="img/incorrect-white.png" alt="Spieler 1 Falsch">
+						<img id="img3_Spieler1" src="img/unknown-white.png" alt="Spieler 1 unbeantwortet">
 					</div>
 				</div>
 			</section>		
 			<section>
 				<h1>EWA</h1>
 			</section>
-			<section id="imgSpieler2">		
+			<section id="section_imgSpieler2">		
 				<div class="divRight">
 					<p>Spieler 2</p>
 					<div id="imgSpieler2">
-						<img id="img1_Spieler2" src="img/correct-white.png" >
-						<img id="img2_Spieler2" src="img/correct-white.png" >
-						<img id="img3_Spieler2" src="img/unknown-white.png"  >
+						<img id="img1_Spieler2" src="img/correct-white.png" alt="Spieler 2 Korrekt">
+						<img id="img2_Spieler2" src="img/correct-white.png" alt="Spieler 2 Korrekt">
+						<img id="img3_Spieler2" src="img/unknown-white.png" alt="Spieler 2 Unbeantwortet" >
 					</div>
 				</div>
 			</section>	
@@ -84,8 +83,10 @@
 		</form>
 		<form id="formStatus" class="formStatus">
 			<section id="status">
-				<label id="zeitLabel">Verbleibende Zeit: 00:30</label>
-				<progress id="progressbar" value="0" max="30"></progress>  			
+				<div class="divProgress">
+					<label id="zeitLabel">Verbleibende Zeit: 00:30</label>
+					<progress id="progressbar" value="0" max="30"></progress>  
+				</div>
 			</section>
 			<section id="buttonWeiter">
 				<section class="weiterSection">
@@ -93,12 +94,12 @@
 				</section>
 			</section>
 			<footer>
-					Letztes Spiel: Nie
-				</footer>
+				Letztes Spiel: Nie
+			</footer>
 		</form>
 		
 		<footer>  
-			<p>&copy; 2014 BIG QUIZ</p>  
+			&copy; 2014 BIG QUIZ
 		</footer>  
 	</body>
 </html>
