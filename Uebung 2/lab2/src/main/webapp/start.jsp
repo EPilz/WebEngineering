@@ -20,7 +20,8 @@
         </nav>
         
         <section role="main" id="quiz">
-          <a id="startgame" href="question.jsp">Quiz starten</a>
+        	<!-- <jsp:forward page="question.jsp" /> -->
+        	<a id="startgame" href="question.jsp">Quiz starten</a>
         </section>
 
         <!-- footer -->
