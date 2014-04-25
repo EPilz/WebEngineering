@@ -18,10 +18,11 @@
                 <li><a id="logoutlink" href="#">Abmelden</a></li>
             </ul>
         </nav>
-        
+        <jsp:useBean id="newplay" class="at.ac.tuwien.big.we14.lab2.api.impl.SimplePlay" scope="session"/>
         <section role="main" id="quiz">
         	<!-- <jsp:forward page="question.jsp" /> -->
         	<a id="startgame" href="question.jsp">Quiz starten</a>
+            <jsp:setProperty name ="newplay" property="round" value="1">
         </section>
 
         <!-- footer -->

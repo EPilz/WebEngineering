@@ -1,5 +1,5 @@
-<jsp:useBean id="player1" scope ="session" class="Beans.Player" />
-<jsp:useBean id="player2" scope ="session" class="Beans.Player" />
+<!--jsp:useBean id="player1" scope ="session" class="Beans.Player" />
+jsp:useBean id="player2" scope ="session" class="Beans.Player" />-->
 
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -25,39 +25,48 @@
         </nav>
         
         <!-- round info -->
+        <jsp:useBean id = "category" class = "at.ac.tuwien.big.we14.lab2.api.impl.SimpleCategory" scope="session"/>
+        <jsp:useBean id="player1"   class = "at.ac.tuwien.big.we14.lab2.api.impl.SimplePlayer" scope="session"/>
+        <jsp:useBean id="player2"   class = "at.ac.tuwien.big.we14.lab2.api.impl.SimplePlayer" scope="session"/>
+        <jsp:useBean id="answer" class="at.ac.tuwien.big.we14.lab2.api.impl.SimpleAnswer" scope="session"/>
         <section role="main">
             <section id="roundinfo" aria-labelledby="roundinfoheading">
                 <h2 id="roundinfoheading" class="accessibility">Spielerinformationen</h2>
                 <div id="player1info">
-                    <span id="player1name">Spieler 1</span>
+                    <span id="player1name"><%= player1.getName()%></span>
                     <ul class="playerroundsummary">
-                        <li><span class="accessibility">Frage 1:</span><span id="player1answer1" class="correct">Richtig</span></li>
-                        <li><span class="accessibility">Frage 2:</span><span id="player1answer2" class="incorrect">Falsch</span></li>
-                        <li><span class="accessibility">Frage 3:</span><span id="player1answer3" class="unknown">Unbekannt</span></li>
+                        <!-- mit answer -->
+                        <li><span class="accessibility">Frage 1:</span><span id="player1answer1" class="correct"><jsp:setProperty name="answer" property="answer" value="true"/></span></li>
+                        <li><span class="accessibility">Frage 2:</span><span id="player1answer2" class="incorrect"><jsp:setProperty name="answer" property="answer" value="false"/></span></li>
+                        <li><span class="accessibility">Frage 3:</span><span id="player1answer3" class="unknown"><jsp:setProperty name="answer" property="answer"/></span></li>
                     </ul>
                 </div>
                 <div id="player2info">
-                    <span id="player2name">Spieler 2</span>
+                    <span id="player2name"><%= player2.getName()%></span>
                     <ul class="playerroundsummary">
                         <li><span class="accessibility">Frage 1:</span><span id="player2answer1" class="correct">Richtig</span></li>
                         <li><span class="accessibility">Frage 2:</span><span id="player2answer2" class="correct">Richtig</span></li>
                         <li><span class="accessibility">Frage 3:</span><span id="player2answer3" class="unknown">Unbekannt</span></li>
                     </ul>
                 </div>
-                <div id="currentcategory"><span class="accessibility">Kategorie:</span> Sport</div>
+                <div id="currentcategory"><span class="accessibility">Kategorie:</span> <%= category.getName()%></div>
             </section>
             
             <!-- Question -->
+            <jsp:useBean id = "question" class = "at.ac.tuwien.big.we14.lab2.api.impl.SimpleQuestion" scope="session"/>
+            <jsp:useBean id="choice" class="at.ac.tuwien.big.we14.lab2.api.impl.SimpleChoice" scope="session"/>
             <section id="question" aria-labelledby="questionheading">
                 
                 <form id="questionform" action="question.jsp" method="post">
                     <h2 id="questionheading" class="accessibility">Frage</h2>
-                    <p id="questiontext">Welche zwei LVAs werden im Model EWA zusammengefasst?</p>
+                    <%= question.getText()%>
+                    <jsp:setProperty name="question" property="text"/>
                     <ul id="answers">
-                        <li><input id="option1" type="checkbox"/><label for="option1">IT Strategie</label></li>
-                        <li><input id="option2" type="checkbox"/><label for="option2">Web Engineering</label></li>
-                        <li><input id="option3" type="checkbox"/><label for="option3">Semistrukturierte Daten</label></li>
-                        <li><input id="option4" type="checkbox"/><label for="option4">Objektorientierte Modellierung</label></li>
+
+                        <li><input id="option1" type="checkbox"/><label for="option1"><%= choice.getText()%></label></li>
+                        <li><input id="option2" type="checkbox"/><label for="option2"><%= choice.getText()%></label></li>
+                        <li><input id="option3" type="checkbox"/><label for="option3"><%= choice.getText()%></label></li>
+                        <li><input id="option4" type="checkbox"/><label for="option4"><%= choice.getText()%></label></li>
                     </ul>
                     <input id="timeleftvalue" type="hidden" value="100"/>
                     <input id="next" type="submit" value="weiter" accesskey="s"/>

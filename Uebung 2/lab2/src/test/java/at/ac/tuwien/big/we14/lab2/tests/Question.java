@@ -36,8 +36,8 @@ public class Question {
 		this.id = 0;
 		this.text = "";
 		this.maxTime = 60;
-		this.wrongChoices = new ArrayList<>();
-		this.correctChoices = new ArrayList<>();
+		this.wrongChoices = new ArrayList<Choice>();
+		this.correctChoices = new ArrayList<Choice>();
 		this.category = null;
 	}
 
