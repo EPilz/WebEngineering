@@ -17,6 +17,19 @@
         <link rel="stylesheet" type="text/css" href="style/screen.css" />
         <script src="js/jquery.js" type="text/javascript"></script>
         <script src="js/framework.js" type="text/javascript"></script>
+        <script type="text/javascript">
+       		window.onload = function() {
+	        	if(supportsLocalStorage()) {
+	        		var date = localStorage.getItem("date");
+	        		
+	        		if(date != null) {
+	        			last = document.getElementById("lastgame");
+	        			last.innerHTML = "<p>Letztes Spiel: " + date + "</p>";
+	        		}
+	        	}
+       		}
+        	
+		</script>
     </head>
     <body id="questionpage">
         <a class="accessibility" href="#question">Zur Frage springen</a>

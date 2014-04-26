@@ -9,6 +9,7 @@
         <link rel="stylesheet" type="text/css" href="style/screen.css" />
         <script src="js/jquery.js" type="text/javascript"></script>
         <script src="js/framework.js" type="text/javascript"></script>
+        
     </head>
     <body id="startpage">
         <header role="banner" aria-labelledby="mainheading"><h1 id="mainheading"><span class="accessibility">Business Informatics Group</span> Quiz</h1></header>

@@ -13,6 +13,12 @@
         <link rel="stylesheet" type="text/css" href="style/screen.css" />
         <script src="js/jquery.js" type="text/javascript"></script>
         <script src="js/framework.js" type="text/javascript"></script>
+        <script type="text/javascript">
+        	if(supportsLocalStorage()) {
+        		
+				localStorage.setItem("date", new Date().toLocaleString()); 
+        	}
+		</script>
     </head>
     <body id="winnerpage">
         <a class="accessibility" href="#roundwinner">Zur Spielwertung springen</a>

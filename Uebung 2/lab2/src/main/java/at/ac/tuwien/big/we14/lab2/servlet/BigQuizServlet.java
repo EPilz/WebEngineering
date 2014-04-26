@@ -40,6 +40,7 @@ public class BigQuizServlet extends HttpServlet {
 	@Override
     public void init(ServletConfig config) throws ServletException {
 		super.init(config);
+
 		ServletContext servletContext = config.getServletContext();
 		QuizFactory factory = ServletQuizFactory.init(servletContext);
 		QuestionDataProvider provider = factory.createQuestionDataProvider();
@@ -55,7 +56,7 @@ public class BigQuizServlet extends HttpServlet {
 		
         if(action == null) {
         	dispatcher = getServletContext().getRequestDispatcher("/start.jsp");       	
-        } if(action.equals("quizStart")) {       	
+        } else if(action.equals("quizStart")) {       	
          	Player player1 = new SimplePlayer("Spieler 1");
          	Player player2 = new SimplePlayer("Spieler 2");
          	game = new SimpleGame(player1, player2);      	
