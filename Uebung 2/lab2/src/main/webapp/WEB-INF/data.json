@@ -2,7 +2,7 @@
     { "name": "Web Engineering",
       "questions": [
         { "id": 1,
-          "text": "Was sind gÃ¼ltige HTTP-Methoden?",
+          "text": "Was sind gültige HTTP-Methoden?",
           "maxTime": 30,
           "wrongChoices": [
             {	"text" : "RETRIEVE" },
@@ -16,7 +16,7 @@
           ]
         },
         { "id": 2,
-          "text": "Welche Prinzipien gehÃ¶ren zu den \"Web Accessibility Guidelines\"?",
+          "text": "Welche Prinzipien gehören zu den \"Web Accessibility Guidelines\"?",
           "maxTime": 40,
           "wrongChoices": [
             {	"text" : "Clear" },
@@ -30,7 +30,7 @@
           ]
         },
         { "id": 3,
-          "text": "Welche Elemente wurden in HTML5 neu eingefÃ¼hrt?",
+          "text": "Welche Elemente wurden in HTML5 neu eingeführt?",
           "maxTime": 35,
           "wrongChoices": [
             {	"text" : "fieldset" },
@@ -75,7 +75,7 @@
           "maxTime": 60,
           "wrongChoices": [
             {	"text" : "hat statische Typen." },
-            {	"text" : "lÃ¤uft immer server-seitig." },
+            {	"text" : "läuft immer server-seitig." },
             {	"text" : "hat Klassen und Objekte." }
           ],
           "correctChoices": [
@@ -85,7 +85,7 @@
           ]
         },
         { "id": 7,
-          "text": "Was sind mÃ¶gliche Web Design-Methoden?",
+          "text": "Was sind mögliche Web Design-Methoden?",
           "maxTime": 30,
           "wrongChoices": [
             {	"text" : "Regressive shrinkage" }
@@ -101,7 +101,7 @@
     { "name": "TU Wien",
       "questions": [
         { "id": 8,
-          "text": "Welche FakultÃ¤ten gibt es an der TU Wien?",
+          "text": "Welche Fakultäten gibt es an der TU Wien?",
           "maxTime": 30,
           "wrongChoices": [
             {	"text" : "Medizin" }
@@ -113,7 +113,7 @@
           ]
         },
         { "id": 9,
-          "text": "Welche Institute gibt es an der FakultÃ¤t fÃ¼r Informatik?",
+          "text": "Welche Institute gibt es an der Fakultät für Informatik?",
           "maxTime": 40,
           "wrongChoices": [
             {	"text" : "Verkehrswissenschaften" },
@@ -138,7 +138,7 @@
           ]
         },
         { "id": 11,
-          "text": "Wann wurde die TU Wien gegrÃ¼ndet?",
+          "text": "Wann wurde die TU Wien gegründet?",
           "maxTime": 20,
           "wrongChoices": [
             {	"text" : "1915" },
@@ -168,11 +168,11 @@
           "maxTime": 30,
           "wrongChoices": [
             {	"text" : "Freyung" },
-            {	"text" : "UniversitÃ¤tsring" }
+            {	"text" : "Universitätsring" }
           ],
           "correctChoices": [
-            {	"text" : "FreihausgrÃ¼nde" },
-            {	"text" : "FavoritenstraÃŸe" }
+            {	"text" : "Freihausgründe" },
+            {	"text" : "Favoritenstraße" }
           ]
         },
         { "id": 14,
@@ -252,7 +252,7 @@
           ]
         },
         { "id": 20,
-          "text": "Welche bekannten Parser gibt es fÃ¼r XML?",
+          "text": "Welche bekannten Parser gibt es für XML?",
           "maxTime": 20,
           "wrongChoices": [
             {	"text" : "MGF" },
@@ -294,7 +294,7 @@
           ]
         },
         { "id": 23,
-          "text": "Welche IPv4-Adressen gehÃ¶ren dem privaten Netzbereich an und werden im Internet nicht geroutet?",
+          "text": "Welche IPv4-Adressen gehören dem privaten Netzbereich an und werden im Internet nicht geroutet?",
           "maxTime": 40,
           "wrongChoices": [
             {	"text" : "192.166.2.1" },
@@ -370,7 +370,7 @@
           "maxTime": 35,
           "wrongChoices": [
             {	"text" : "Sitzung" },
-            {	"text" : "BitÃ¼bertragung" },
+            {	"text" : "Bitübertragung" },
             {	"text" : "Darstellung" },
             {	"text" : "Vermittlung" }
           ],
@@ -386,7 +386,7 @@
     { "name": "Internet und -verwendung",
       "questions": [
         { "id": 29,
-          "text": "Unter den Top 5 der LÃ¤nder, mit den meisten Internet-Usern befinden sich...",
+          "text": "Unter den Top 5 der Länder, mit den meisten Internet-Usern befinden sich...",
           "maxTime": 30,
           "wrongChoices": [
             {	"text" : "United Kingdom" },
@@ -425,19 +425,19 @@
           ]
         },
         { "id": 32,
-          "text": "Wieviele eindeutige Benutzer hat Youtube ungefÃ¤hr pro Monat?",
+          "text": "Wieviele eindeutige Benutzer hat Youtube ungefähr pro Monat?",
           "maxTime": 30,
           "wrongChoices": [
-            {	"text" : "Ãœber eine Million" },
-            {	"text" : "Ãœber zehn Millionen" },
-            {	"text" : "Ãœber hundert Millionen" }
+            {	"text" : "Über eine Million" },
+            {	"text" : "Über zehn Millionen" },
+            {	"text" : "Über hundert Millionen" }
           ],
           "correctChoices": [ // http://www.youtube.com/yt/press/statistics.html
-            {	"text" : "Ãœber eine Milliarde" }
+            {	"text" : "Über eine Milliarde" }
           ]
         },
         { "id": 33,
-          "text": "Welche Unternehmen gehÃ¶ren zu Facebook?",
+          "text": "Welche Unternehmen gehören zu Facebook?",
           "maxTime": 20,
           "wrongChoices": [
             {	"text" : "Pinterest" },
@@ -449,7 +449,7 @@
           ]
         },
         { "id": 34,
-          "text": "Wer der folgenden Personen hat Google (mit-)begrÃ¼ndet?",
+          "text": "Wer der folgenden Personen hat Google (mit-)begründet?",
           "maxTime": 40,
           "wrongChoices": [
             {	"text" : "Eric Schmidt" },
@@ -463,7 +463,7 @@
           ]
         },
         { "id": 35,
-          "text": "Wieviele Haushalte in Ã–sterreich haben Breitband-Internetzugang?",
+          "text": "Wieviele Haushalte in Österreich haben Breitband-Internetzugang?",
           "maxTime": 20,
           "wrongChoices": [
             {	"text" : "50\% - 75\%" },

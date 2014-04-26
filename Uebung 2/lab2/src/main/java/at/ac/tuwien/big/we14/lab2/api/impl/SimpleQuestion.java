@@ -35,8 +35,8 @@ public class SimpleQuestion implements Question {
 	public SimpleQuestion() {
 		this.text = "";
 		this.maxTime = 60;
-		this.wrongChoices = new ArrayList<Choice>();
-		this.correctChoices = new ArrayList<Choice>();
+		this.wrongChoices = new ArrayList<>();
+		this.correctChoices = new ArrayList<>();
 		this.category = null;
 	}
 
@@ -45,8 +45,8 @@ public class SimpleQuestion implements Question {
 		this.id = id;
 		this.text = text;
 		this.maxTime = maxTime;
-		this.wrongChoices = new ArrayList<Choice>();
-		this.correctChoices = new ArrayList<Choice>();
+		this.wrongChoices = new ArrayList<>();
+		this.correctChoices = new ArrayList<>();
 		this.category = category;
 	}
 
@@ -93,10 +93,9 @@ public class SimpleQuestion implements Question {
 
 	@Override
 	public List<Choice> getAllChoices() {
-		List<Choice> allChoices;
-        allChoices = new ArrayList<Choice>();
+		List<Choice> allChoices = new ArrayList<>();
 
-        allChoices.addAll(correctChoices);
+		allChoices.addAll(correctChoices);
 		allChoices.addAll(wrongChoices);
 
 		Collections.shuffle(allChoices);

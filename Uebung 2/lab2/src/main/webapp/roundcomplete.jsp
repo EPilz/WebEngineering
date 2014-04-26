@@ -1,6 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page import="at.ac.tuwien.big.we14.lab2.servlet.BigQuizServlet"%>
+<jsp:useBean id="currentRound" scope="session" class="at.ac.tuwien.big.we14.lab2.api.impl.SimpleRound" />
+<jsp:useBean id="game" scope="session" class="at.ac.tuwien.big.we14.lab2.api.impl.SimpleGame" />
+<jsp:useBean id="player1" scope="session" class="at.ac.tuwien.big.we14.lab2.api.impl.SimplePlayer" />
+<jsp:useBean id="player2" scope="session" class="at.ac.tuwien.big.we14.lab2.api.impl.SimplePlayer" />
+
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
     <head>
         <meta charset="utf-8"/>
@@ -21,41 +27,48 @@
         </nav>
         
         <section role="main">
-            <jsp:useBean id="play" class="at.ac.tuwien.big.we14.lab2.api.impl.SimplePlay" scope="session"/>
             <!-- winner message -->
             <section id="roundwinner" aria-labelledby="roundwinnerheading">
                 <h2 id="roundwinnerheading" class="accessibility">Rundenzwischenstand</h2>
-                <p class="roundwinnermessage"><%=play.roundWinner()%> gewinnt Runde <%=play.getCount()%>!</p>
+                <p class="roundwinnermessage"><%=currentRound.getRoundWinnerText() %></p>
             </section>
         
             <!-- round info -->    
             <section id="roundinfo" aria-labelledby="roundinfoheading">
-                <jsp:useBean id="player1" class="at.ac.tuwien.big.we14.lab2.api.impl.SimplePlayer" scope="session"/>
-                <jsp:useBean id="player2" class="at.ac.tuwien.big.we14.lab2.api.impl.SimplePlayer" scope="session"/>
                 <h2 id="roundinfoheading" class="accessibility">Spielerinformationen</h2>
                 <div id="player1info" class="playerinfo">
-                    <span id="player1name" class="playername"><%=player1.getName()%></span>
+                    <span id="player1name" class="playername"><%= player1.getName()%></span>
                     <ul class="playerroundsummary">
-                        <li><span class="accessibility">Frage 1:</span><span id="player1answer1" class="correct"><%=player1.getAnswer()%></span></li>
-                        <li><span class="accessibility">Frage 2:</span><span id="player1answer2" class="incorrect"><%=player1.getAnswer()%></span></li>
-                        <li><span class="accessibility">Frage 3:</span><span id="player1answer3" class="correct"><%=player1.getAnswer()%></span></li>
+                     <% for(int i = 0; i < BigQuizServlet.NUM_QUESTIONS; i++) { %>
+                        <li>
+                        	<span class="accessibility">Frage <%=i+1%>:</span>
+                        	<span id="player1answer=<%=i+1%>"class="<%=currentRound.getAnswersPlayer1()[i].classType() %>">
+                        		  	<%=currentRound.getAnswersPlayer1()[i].text() %>
+                            </span>
+                        </li>
+                     <% } %>     
                     </ul>
-                    <p id="player1roundcounter" class="playerroundcounter">Gewonnene Runden: <span id="player1wonrounds" class="playerwonrounds">2</span></p>
+                    <p id="player1roundcounter" class="playerroundcounter">Gewonnene Runden: <span id="player1wonrounds" class="playerwonrounds"><%= game.getPlayer1WinCount()%></span></p>
                 </div>
                 <div id="player2info" class="playerinfo">
-                    <span id="player2name" class="playername"><%=player2.getName()%></span>
+                    <span id="player2name" class="playername"><%= player2.getName()%></span>
                     <ul class="playerroundsummary">
-                        <li><span class="accessibility">Frage 1:</span><span id="player2answer1" class="correct"><%=player2.getAnswer()%></span></li>
-                        <li><span class="accessibility">Frage 2:</span><span id="player2answer2" class="correct"><%=player2.getAnswer()%></span></li>
-                        <li><span class="accessibility">Frage 3:</span><span id="player2answer3" class="correct"><%=player2.getAnswer()%></span></li>
+                        <% for(int i = 0; i < BigQuizServlet.NUM_QUESTIONS; i++) { %>
+                   	     <li>
+                        	<span class="accessibility">Frage <%=i+1%>:</span>
+                        	<span id="player2answer=<%=i+1%>"class="<%=currentRound.getAnswersPlayer2()[i].classType() %>">
+                        		  	<%=currentRound.getAnswersPlayer2()[i].text() %>
+                            </span>
+                         </li>
+                        <% } %> 
                     </ul>
-                    <p id="player2roundcounter" class="playerroundcounter">Gewonnene Runden: <span id="player2wonrounds" class="playerwonrounds">1</span></p>
+                    <p id="player2roundcounter" class="playerroundcounter">Gewonnene Runden: <span id="player2wonrounds" class="playerwonrounds"><%= game.getPlayer2WinCount()%></span></p>
                 </div>
-                <a id="next" href="question.jsp">Weiter</a>
+                <a id="next" href="BigQuizServlet?action=roundCompleteWeiter">Weiter</a>
             </section>
         </section>
 
         <!-- footer -->
-        <footer role="contentinfo">© 2014 BIG Quiz</footer>
+        <footer role="contentinfo">Â© 2014 BIG Quiz</footer>
     </body>
 </html>

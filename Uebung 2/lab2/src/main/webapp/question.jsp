@@ -1,10 +1,14 @@
-<!--jsp:useBean id="player1" scope ="session" class="Beans.Player" />
-jsp:useBean id="player2" scope ="session" class="Beans.Player" />-->
-
-
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.util.List" %>
+<%@ page import="at.ac.tuwien.big.we14.lab2.api.Choice" %>
+<%@page import="at.ac.tuwien.big.we14.lab2.servlet.BigQuizServlet"%>
+<jsp:useBean id="player1" scope="session" class="at.ac.tuwien.big.we14.lab2.api.impl.SimplePlayer" />
+<jsp:useBean id="player2" scope="session" class="at.ac.tuwien.big.we14.lab2.api.impl.SimplePlayer" />
+<jsp:useBean id="currentRound" scope="session" class="at.ac.tuwien.big.we14.lab2.api.impl.SimpleRound" />
+<jsp:useBean id="currentQuestion" scope="session" class="at.ac.tuwien.big.we14.lab2.api.impl.SimpleQuestion" />
+
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
     <head>
         <meta charset="utf-8"/>
@@ -25,50 +29,54 @@ jsp:useBean id="player2" scope ="session" class="Beans.Player" />-->
         </nav>
         
         <!-- round info -->
-        <jsp:useBean id = "category" class = "at.ac.tuwien.big.we14.lab2.api.impl.SimpleCategory" scope="session"/>
-        <jsp:useBean id="player1"   class = "at.ac.tuwien.big.we14.lab2.api.impl.SimplePlayer" scope="session"/>
-        <jsp:useBean id="player2"   class = "at.ac.tuwien.big.we14.lab2.api.impl.SimplePlayer" scope="session"/>
-        <jsp:useBean id="answer" class="at.ac.tuwien.big.we14.lab2.api.impl.SimpleAnswer" scope="session"/>
         <section role="main">
             <section id="roundinfo" aria-labelledby="roundinfoheading">
                 <h2 id="roundinfoheading" class="accessibility">Spielerinformationen</h2>
                 <div id="player1info">
                     <span id="player1name"><%= player1.getName()%></span>
                     <ul class="playerroundsummary">
-                        <!-- mit answer -->
-                        <li><span class="accessibility">Frage 1:</span><span id="player1answer1" class="correct"><jsp:setProperty name="answer" property="answer" value="true"/></span></li>
-                        <li><span class="accessibility">Frage 2:</span><span id="player1answer2" class="incorrect"><jsp:setProperty name="answer" property="answer" value="false"/></span></li>
-                        <li><span class="accessibility">Frage 3:</span><span id="player1answer3" class="unknown"><jsp:setProperty name="answer" property="answer"/></span></li>
+                   	 <% for(int i = 0; i < BigQuizServlet.NUM_QUESTIONS; i++) { %>
+                        <li>
+                        	<span class="accessibility">Frage <%=i+1%>:</span>
+                        	<span id="player1answer=<%=i+1%>"class="<%=currentRound.getAnswersPlayer1()[i].classType() %>">
+                        		  	<%=currentRound.getAnswersPlayer1()[i].text() %>
+                            </span>
+                        </li>
+                     <% } %>              
                     </ul>
                 </div>
                 <div id="player2info">
                     <span id="player2name"><%= player2.getName()%></span>
                     <ul class="playerroundsummary">
-                        <li><span class="accessibility">Frage 1:</span><span id="player2answer1" class="correct">Richtig</span></li>
-                        <li><span class="accessibility">Frage 2:</span><span id="player2answer2" class="correct">Richtig</span></li>
-                        <li><span class="accessibility">Frage 3:</span><span id="player2answer3" class="unknown">Unbekannt</span></li>
+                    	<% for(int i = 0; i < BigQuizServlet.NUM_QUESTIONS; i++) { %>
+                   	     <li>
+                        	<span class="accessibility">Frage <%=i+1%>:</span>
+                        	<span id="player2answer=<%=i+1%>"class="<%=currentRound.getAnswersPlayer2()[i].classType() %>">
+                        		  	<%=currentRound.getAnswersPlayer2()[i].text() %>
+                            </span>
+                         </li>
+                        <% } %>        
                     </ul>
                 </div>
-                <div id="currentcategory"><span class="accessibility">Kategorie:</span> <%= category.getName()%></div>
+                <div id="currentcategory"><span class="accessibility">Kategorie:</span> <%= currentRound.getCategory().getName() %></div>
             </section>
             
             <!-- Question -->
-            <jsp:useBean id = "question" class = "at.ac.tuwien.big.we14.lab2.api.impl.SimpleQuestion" scope="session"/>
-            <jsp:useBean id="choice" class="at.ac.tuwien.big.we14.lab2.api.impl.SimpleChoice" scope="session"/>
             <section id="question" aria-labelledby="questionheading">
                 
-                <form id="questionform" action="question.jsp" method="post">
+                <form id="questionform" action="BigQuizServlet"  method="POST">
                     <h2 id="questionheading" class="accessibility">Frage</h2>
-                    <%= question.getText()%>
-                    <jsp:setProperty name="question" property="text"/>
-                    <ul id="answers">
-
-                        <li><input id="option1" type="checkbox"/><label for="option1"><%= choice.getText()%></label></li>
-                        <li><input id="option2" type="checkbox"/><label for="option2"><%= choice.getText()%></label></li>
-                        <li><input id="option3" type="checkbox"/><label for="option3"><%= choice.getText()%></label></li>
-                        <li><input id="option4" type="checkbox"/><label for="option4"><%= choice.getText()%></label></li>
+                    <p id="questiontext"><%= currentQuestion.getText() %></p>
+                    <ul id="answers">                       
+                        <% List<Choice> list = currentQuestion.getAllChoices(); 
+                        	for(int i = 0; i < list.size(); i++) { %>
+				        <li>      
+				        	<input name="<%=list.get(i).getId() %>" id="<%=list.get(i).getId() %>" type="checkbox"/>
+				        	<label for="<%=list.get(i).getId() %>"><%=list.get(i).getText()%></label>
+				        </li>
+				    	<% } %>                        
                     </ul>
-                    <input id="timeleftvalue" type="hidden" value="100"/>
+                    <input id="timeleftvalue" name="timeleftvalue"  type="hidden" value="100"/>
                     <input id="next" type="submit" value="weiter" accesskey="s"/>
                 </form>
             </section>
@@ -85,7 +93,7 @@ jsp:useBean id="player2" scope ="session" class="Beans.Player" />-->
         </section>
 
         <!-- footer -->
-        <footer role="contentinfo">© 2014 BIG Quiz</footer>
+        <footer role="contentinfo">Â© 2014 BIG Quiz</footer>
         
         <script type="text/javascript">
             //<![CDATA[

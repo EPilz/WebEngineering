@@ -10,11 +10,11 @@
  */
 package at.ac.tuwien.big.we14.lab2.api.impl;
 
-import at.ac.tuwien.big.we14.lab2.api.Category;
-import at.ac.tuwien.big.we14.lab2.api.Question;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import at.ac.tuwien.big.we14.lab2.api.Category;
+import at.ac.tuwien.big.we14.lab2.api.Question;
 
 /**
  *
@@ -27,7 +27,7 @@ public class SimpleCategory implements Category {
 
 	public SimpleCategory() {
 		name = "";
-		questions = new ArrayList<Question>();
+		questions = new ArrayList<>();
 	}
 
 	public SimpleCategory(String name) {
