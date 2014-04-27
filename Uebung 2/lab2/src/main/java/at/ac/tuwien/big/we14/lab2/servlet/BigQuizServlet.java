@@ -35,68 +35,66 @@ public class BigQuizServlet extends HttpServlet {
 	public static final int NUM_ROUNDS = 5;
 	public static final int NUM_QUESTIONS = 3;
 	
+	
 	List<Category> categories;
 	
 	@Override
     public void init(ServletConfig config) throws ServletException {
+		System.out.println("init");
 		super.init(config);
-
 		ServletContext servletContext = config.getServletContext();
 		QuizFactory factory = ServletQuizFactory.init(servletContext);
 		QuestionDataProvider provider = factory.createQuestionDataProvider();
 		categories = provider.loadCategoryData();	 
-    }
+    }	
 	
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/question.jsp"); 
 		HttpSession session = request.getSession(true);
-		String action = request.getParameter("action");
-		Game game = null;
-		RequestDispatcher dispatcher = null;
+		Game game = (Game)session.getAttribute("game");		
 		
-        if(action == null) {
-        	dispatcher = getServletContext().getRequestDispatcher("/start.jsp");       	
-        } else if(action.equals("quizStart")) {       	
-         	Player player1 = new SimplePlayer("Spieler 1");
+		String action = request.getParameter("action");
+		if(action == null && game == null) {
+			System.out.println("start");
+			dispatcher = getServletContext().getRequestDispatcher("/start.jsp"); 	
+		}
+
+        if(game == null) {
+        	Player player1 = new SimplePlayer("Spieler 1");
          	Player player2 = new SimplePlayer("Spieler 2");
-         	game = new SimpleGame(player1, player2);      	
+         	game = new SimpleGame(player1, player2);   
          	session.setAttribute("player1", player1);
-         	session.setAttribute("player2", player2); 
-         	dispatcher = getServletContext().getRequestDispatcher("/question.jsp");
-        } else if(action.equals("roundCompleteWeiter")) {       	
-        	game = (Game)session.getAttribute("game");
-        	dispatcher = getServletContext().getRequestDispatcher("/question.jsp");
-        } else if(action.equals("newGame")) {
-        	game = (Game)session.getAttribute("game");
-        	game.clearRounds();
-        	dispatcher = getServletContext().getRequestDispatcher("/question.jsp"); 	
+         	session.setAttribute("player2", player2);  	
+        } else if(game.getRounds().size() == NUM_ROUNDS) {
+        		game.clearRounds();   	
         }
-        if(game != null) {
-		    Category category = chooseCategory(game);
-			Round round = new SimpleRound(category, game, game.getRounds().size() + 1);
-		 	Question question = nextQuestion(round);
-		 	round.addQuestion(question);
-		 	session.setAttribute("game", game);
-		 	session.setAttribute("currentRound", round);
-		 	session.setAttribute("currentQuestion", question);
-        }
-  
+        
+	    Category category = chooseCategory(game);
+		Round round = new SimpleRound(category, game, game.getRounds().size() + 1);
+	 	Question question = nextQuestion(round);
+	 	round.addQuestion(question);
+	 	session.setAttribute("game", game);
+	 	session.setAttribute("currentRound", round);
+	 	session.setAttribute("currentQuestion", question);
+        
         dispatcher.forward(request, response);
 	}
 	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("post");
 		HttpSession session = request.getSession(true);    
 		Question currentQuestion =(Question)session.getAttribute("currentQuestion");
 		if(currentQuestion != null) {		
 			List<Choice> answers = new ArrayList<>();
+
 			for (Choice choice : currentQuestion.getAllChoices()) {
-				String on = request.getParameter("" + choice.getId());
+				String on = request.getParameter("option" + choice.getId());
 				if(on != null) {
 					answers.add(choice);
 				}
 			}
+			
 			Round currentRound = (Round)session.getAttribute("currentRound");
 			int numQuestion = currentRound.getQuestions().size() - 1;
 			
@@ -107,7 +105,7 @@ public class BigQuizServlet extends HttpServlet {
 				currentRound.getAnswersPlayer1()[numQuestion] = Answer.INCORRECT;
 			}
 
-			if(new Random().nextInt(2)  == 1) {
+			if(new Random().nextInt(2) == 1) {
 				currentRound.getAnswersPlayer2()[numQuestion] = Answer.CORRECT;
 			} else {
 				currentRound.getAnswersPlayer2()[numQuestion] = Answer.INCORRECT;
@@ -122,7 +120,6 @@ public class BigQuizServlet extends HttpServlet {
 				currentRound.addQuestion(nextQuestion);
 				session.setAttribute("currentRound", currentRound);
 	         	session.setAttribute("currentQuestion", nextQuestion);
-	         	System.out.println("post to questions");
 	         	dispatcher = getServletContext().getRequestDispatcher("/question.jsp");	            
 			} else {
 				Game game = (Game)session.getAttribute("game");

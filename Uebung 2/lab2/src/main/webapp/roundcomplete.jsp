@@ -42,7 +42,7 @@
                      <% for(int i = 0; i < BigQuizServlet.NUM_QUESTIONS; i++) { %>
                         <li>
                         	<span class="accessibility">Frage <%=i+1%>:</span>
-                        	<span id="player1answer=<%=i+1%>"class="<%=currentRound.getAnswersPlayer1()[i].classType() %>">
+                        	<span id="player1answer<%=i%>"class="<%=currentRound.getAnswersPlayer1()[i].classType() %>">
                         		  	<%=currentRound.getAnswersPlayer1()[i].text() %>
                             </span>
                         </li>
@@ -56,7 +56,7 @@
                         <% for(int i = 0; i < BigQuizServlet.NUM_QUESTIONS; i++) { %>
                    	     <li>
                         	<span class="accessibility">Frage <%=i+1%>:</span>
-                        	<span id="player2answer=<%=i+1%>"class="<%=currentRound.getAnswersPlayer2()[i].classType() %>">
+                        	<span id="player2answer<%=i%>"class="<%=currentRound.getAnswersPlayer2()[i].classType() %>">
                         		  	<%=currentRound.getAnswersPlayer2()[i].text() %>
                             </span>
                          </li>
@@ -64,7 +64,9 @@
                     </ul>
                     <p id="player2roundcounter" class="playerroundcounter">Gewonnene Runden: <span id="player2wonrounds" class="playerwonrounds"><%= game.getPlayer2WinCount()%></span></p>
                 </div>
-                <a id="next" href="BigQuizServlet?action=roundCompleteWeiter">Weiter</a>
+                <form  action="BigQuizServlet" method="GET">
+		          	<input id="next" name="action" type="submit" accesskey="n" value="Weiter">
+		        </form>
             </section>
         </section>
 

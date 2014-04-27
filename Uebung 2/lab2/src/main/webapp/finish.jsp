@@ -14,8 +14,7 @@
         <script src="js/jquery.js" type="text/javascript"></script>
         <script src="js/framework.js" type="text/javascript"></script>
         <script type="text/javascript">
-        	if(supportsLocalStorage()) {
-        		
+        	if(supportsLocalStorage()) {		
 				localStorage.setItem("date", new Date().toLocaleString()); 
         	}
 		</script>
@@ -48,7 +47,9 @@
                     <span id="player2name" class="playername"><%= player2.getName()%></span>
                     <p id="player2roundcounter" class="playerroundcounter">Gewonnene Runden: <span id="player2wonrounds" class="playerwonrounds"><%= game.getPlayer2WinCount()%></span></p>
                 </div>
-                <a id="next" href="BigQuizServlet?action=newGame" accesskey="n">Neues Spiel</a>
+                <form  action="BigQuizServlet" method="GET">
+		          	<input id="next" name="action" type="submit" accesskey="n" value="Neues Spiel">
+		        </form>
             </section>
         </section>
 

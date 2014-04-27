@@ -21,7 +21,9 @@
         </nav>
         
         <section role="main" id="quiz"> 
-          <a id="startgame" href="BigQuizServlet?action=quizStart">Quiz starten</a>
+          <form  action="BigQuizServlet" method="GET">
+          	<input id="startgame" name="action" type="submit" value="Quiz starten">
+          </form>
         </section>
 
         <!-- footer -->

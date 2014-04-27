@@ -27,8 +27,7 @@
 	        			last.innerHTML = "<p>Letztes Spiel: " + date + "</p>";
 	        		}
 	        	}
-       		}
-        	
+       		}        	
 		</script>
     </head>
     <body id="questionpage">
@@ -51,7 +50,7 @@
                    	 <% for(int i = 0; i < BigQuizServlet.NUM_QUESTIONS; i++) { %>
                         <li>
                         	<span class="accessibility">Frage <%=i+1%>:</span>
-                        	<span id="player1answer=<%=i+1%>"class="<%=currentRound.getAnswersPlayer1()[i].classType() %>">
+                        	<span id="player1answer<%=i%>"class="<%=currentRound.getAnswersPlayer1()[i].classType() %>">
                         		  	<%=currentRound.getAnswersPlayer1()[i].text() %>
                             </span>
                         </li>
@@ -64,7 +63,7 @@
                     	<% for(int i = 0; i < BigQuizServlet.NUM_QUESTIONS; i++) { %>
                    	     <li>
                         	<span class="accessibility">Frage <%=i+1%>:</span>
-                        	<span id="player2answer=<%=i+1%>"class="<%=currentRound.getAnswersPlayer2()[i].classType() %>">
+                        	<span id="player2answer<%=i%>"class="<%=currentRound.getAnswersPlayer2()[i].classType() %>">
                         		  	<%=currentRound.getAnswersPlayer2()[i].text() %>
                             </span>
                          </li>
@@ -84,12 +83,13 @@
                         <% List<Choice> list = currentQuestion.getAllChoices(); 
                         	for(int i = 0; i < list.size(); i++) { %>
 				        <li>      
-				        	<input name="<%=list.get(i).getId() %>" id="<%=list.get(i).getId() %>" type="checkbox"/>
-				        	<label for="<%=list.get(i).getId() %>"><%=list.get(i).getText()%></label>
+				        	<input name="option<%=list.get(i).getId() %>" id="option<%=list.get(i).getId() %>" type="checkbox"/>
+				        	<label for="option<%=list.get(i).getId() %>" id="labeloption<%=i %>"><%=list.get(i).getText()%></label>
 				        </li>
 				    	<% } %>                        
                     </ul>
                     <input id="timeleftvalue" name="timeleftvalue"  type="hidden" value="100"/>
+                    <input id="questionid" name="questionid" type="hidden" value="<%= currentQuestion.getId() %>"/>
                     <input id="next" type="submit" value="weiter" accesskey="s"/>
                 </form>
             </section>
