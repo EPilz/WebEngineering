@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.List" %>
@@ -50,7 +50,7 @@
                    	 <% for(int i = 0; i < BigQuizServlet.NUM_QUESTIONS; i++) { %>
                         <li>
                         	<span class="accessibility">Frage <%=i+1%>:</span>
-                        	<span id="player1answer<%=i%>"class="<%=currentRound.getAnswersPlayer1()[i].classType() %>">
+                        	<span id="player1answer<%=i%>" class="<%=currentRound.getAnswersPlayer1()[i].classType() %>">
                         		  	<%=currentRound.getAnswersPlayer1()[i].text() %>
                             </span>
                         </li>
@@ -63,7 +63,7 @@
                     	<% for(int i = 0; i < BigQuizServlet.NUM_QUESTIONS; i++) { %>
                    	     <li>
                         	<span class="accessibility">Frage <%=i+1%>:</span>
-                        	<span id="player2answer<%=i%>"class="<%=currentRound.getAnswersPlayer2()[i].classType() %>">
+                        	<span id="player2answer<%=i%>" class="<%=currentRound.getAnswersPlayer2()[i].classType() %>">
                         		  	<%=currentRound.getAnswersPlayer2()[i].text() %>
                             </span>
                          </li>

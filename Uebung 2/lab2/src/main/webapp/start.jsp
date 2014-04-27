@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
@@ -22,7 +22,7 @@
         
         <section role="main" id="quiz"> 
           <form  action="BigQuizServlet" method="GET">
-          	<input id="startgame" name="action" type="submit" value="Quiz starten">
+          	<input id="startgame" name="action" type="submit" value="Quiz starten"/>
           </form>
         </section>
 

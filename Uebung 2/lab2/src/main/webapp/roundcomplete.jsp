@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="at.ac.tuwien.big.we14.lab2.servlet.BigQuizServlet"%>
@@ -42,7 +42,7 @@
                      <% for(int i = 0; i < BigQuizServlet.NUM_QUESTIONS; i++) { %>
                         <li>
                         	<span class="accessibility">Frage <%=i+1%>:</span>
-                        	<span id="player1answer<%=i%>"class="<%=currentRound.getAnswersPlayer1()[i].classType() %>">
+                        	<span id="player1answer<%=i%>" class="<%=currentRound.getAnswersPlayer1()[i].classType() %>">
                         		  	<%=currentRound.getAnswersPlayer1()[i].text() %>
                             </span>
                         </li>
@@ -56,7 +56,7 @@
                         <% for(int i = 0; i < BigQuizServlet.NUM_QUESTIONS; i++) { %>
                    	     <li>
                         	<span class="accessibility">Frage <%=i+1%>:</span>
-                        	<span id="player2answer<%=i%>"class="<%=currentRound.getAnswersPlayer2()[i].classType() %>">
+                        	<span id="player2answer<%=i%>" class="<%=currentRound.getAnswersPlayer2()[i].classType() %>">
                         		  	<%=currentRound.getAnswersPlayer2()[i].text() %>
                             </span>
                          </li>
@@ -65,7 +65,7 @@
                     <p id="player2roundcounter" class="playerroundcounter">Gewonnene Runden: <span id="player2wonrounds" class="playerwonrounds"><%= game.getPlayer2WinCount()%></span></p>
                 </div>
                 <form  action="BigQuizServlet" method="GET">
-		          	<input id="next" name="action" type="submit" accesskey="n" value="Weiter">
+		          	<input id="next" name="action" type="submit" accesskey="n" value="Weiter"/>
 		        </form>
             </section>
         </section>

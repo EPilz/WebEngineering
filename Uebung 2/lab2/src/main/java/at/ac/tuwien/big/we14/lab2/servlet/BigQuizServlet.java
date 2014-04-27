@@ -35,12 +35,10 @@ public class BigQuizServlet extends HttpServlet {
 	public static final int NUM_ROUNDS = 5;
 	public static final int NUM_QUESTIONS = 3;
 	
-	
 	List<Category> categories;
 	
 	@Override
     public void init(ServletConfig config) throws ServletException {
-		System.out.println("init");
 		super.init(config);
 		ServletContext servletContext = config.getServletContext();
 		QuizFactory factory = ServletQuizFactory.init(servletContext);
@@ -56,7 +54,6 @@ public class BigQuizServlet extends HttpServlet {
 		
 		String action = request.getParameter("action");
 		if(action == null && game == null) {
-			System.out.println("start");
 			dispatcher = getServletContext().getRequestDispatcher("/start.jsp"); 	
 		}
 

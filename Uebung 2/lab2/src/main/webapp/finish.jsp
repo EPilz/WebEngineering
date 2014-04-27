@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <jsp:useBean id="game" scope="session" class="at.ac.tuwien.big.we14.lab2.api.impl.SimpleGame" />
@@ -48,7 +48,7 @@
                     <p id="player2roundcounter" class="playerroundcounter">Gewonnene Runden: <span id="player2wonrounds" class="playerwonrounds"><%= game.getPlayer2WinCount()%></span></p>
                 </div>
                 <form  action="BigQuizServlet" method="GET">
-		          	<input id="next" name="action" type="submit" accesskey="n" value="Neues Spiel">
+		          	<input id="next" name="action" type="submit" accesskey="n" value="Neues Spiel"/>
 		        </form>
             </section>
         </section>
