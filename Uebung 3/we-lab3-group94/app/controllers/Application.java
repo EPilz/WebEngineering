@@ -7,15 +7,20 @@ import at.ac.tuwien.big.we14.lab2.api.impl.PlayQuizFactory;
 
 import views.html.*;
 
+import static play.data.Form.form;
+
 public class Application extends Controller {
 
-    public static Result index() {
-        return ok(index.render("Your new application is ready :))"));
+    public static Result authentication() {
+        return ok(authentication.render());
     }
 
-    public static Result sayHello() {
-        QuizFactory factory = new PlayQuizFactory(jsonFilePath, user);
+    public static Result index() {
+        return ok(index.render());
+    }
 
-        return ok("Hello " + request().remoteAddress());
+    public static Result login() {
+        System.out.println("login");
+        return ok(index.render());
     }
 }
