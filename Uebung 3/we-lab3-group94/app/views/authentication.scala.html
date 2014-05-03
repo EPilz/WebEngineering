@@ -1,12 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html>
+@(form: Form[User])
 
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
     <head>
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Business Informatics Group Quiz - Login</title>
-        <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/main.css")" />
+        <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/main.css")"/>
     </head>
     <body id="loginpage">
         <a class="accessibility" href="#login">Zum Login springen</a>
@@ -20,22 +20,23 @@
         <!-- Login section -->
         <section role="main">
             <section id="login" aria-labelledby="loginheading">
-                <form action="login.html" method="get">
+                @helper.form(routes.Application.login()) {
                     <fieldset>
                         <legend id="loginheading">Login</legend>
-                        <label for="username">Benutzername:</label>
-                        <input id="username" type="text" required="required"/>
-                        <label for="password">Passwort:</label>
-                        <input id="password" type="password" required="required"/>
+                        @for(error <- form("formError").errors) {
+                            <div id="error_msg_name" class="error" role="alert"> @error.message </div>
+                        }
+                        @helper.inputText(form("name"), 'id -> "username", 'required -> "required", '_showConstraints -> false, '_label -> "Benutzername:")
+                        @helper.inputPassword(form("password"), 'id -> "password", 'required -> "required", '_showConstraints -> false, '_label -> "Passwort:")
                         <input id="loginsubmit" type="submit" value="Anmelden"/>
                     </fieldset>
-                </form>
+                }
             </section>
             <!-- Register section -->
             <section id="register" aria-labelledby="registerheading">
                 <h2 id="registerheading" class="accessibility">Registrierung</h2>
                 <p>Nicht registriert?</p>
-                <a href="register.html">Zur Registierung</a>
+                <a href="@routes.Application.registration()">Zur Registierung</a>
             </section>
         </section>
 

@@ -1,7 +1,13 @@
 package models;
 
+import play.data.format.Formats;
+import play.data.validation.Constraints;
+import play.data.validation.ValidationError;
+
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Elisabeth on 03.05.2014.
@@ -13,13 +19,26 @@ public class User implements at.ac.tuwien.big.we14.lab2.api.User{
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private long id;
+
     private String firstname;
+
     private String lastname;
+
+    @Formats.DateTime(pattern="dd.MM.yyyy")
     @Temporal(TemporalType.DATE)
     private Date birthdate;
+
     @Enumerated(EnumType.STRING)
-    private Geschlecht geschlecht;
+    private Gender gender;
+
+    @Constraints.Required
+    @Constraints.MinLength(4)
+    @Constraints.MaxLength(8)
     private String name;
+
+    @Constraints.Required
+    @Constraints.MinLength(4)
+    @Constraints.MaxLength(8)
     private String password;
 
     public User() {
@@ -62,12 +81,12 @@ public class User implements at.ac.tuwien.big.we14.lab2.api.User{
         this.lastname = lastname;
     }
 
-    public Geschlecht getGeschlecht() {
-        return geschlecht;
+    public Gender getGender() {
+        return gender;
     }
 
-    public void setGeschlecht(Geschlecht geschlecht) {
-        this.geschlecht = geschlecht;
+    public void setGender(Gender gender) {
+        this.gender = gender;
     }
 
     public String getPassword() {
@@ -85,4 +104,6 @@ public class User implements at.ac.tuwien.big.we14.lab2.api.User{
     public void setName(String name) {
         this.name = name;
     }
+
+
 }

@@ -3,13 +3,13 @@ package models;
 /**
  * Created by Elisabeth on 03.05.2014.
  */
-public enum Geschlecht {
-    WEIBLICH("Weiblich"),
-    MAENNLICH("Männlich");
+public enum Gender {
+    FEMALE("Weiblich"),
+    MALE("Männlich");
 
     String text;
 
-    Geschlecht(String text) {
+    Gender(String text) {
         this.text = text;
     }
 
