@@ -1,9 +1,8 @@
 package controllers;
 
-import models.User;
-import play.*;
+import at.ac.tuwien.big.we14.lab2.api.User;
+import models.SimpleUser;
 import play.data.Form;
-import play.data.validation.ValidationError;
 import play.db.jpa.JPA;
 import play.db.jpa.Transactional;
 import play.mvc.*;
@@ -20,13 +19,12 @@ import static play.data.Form.form;
 public class Application extends Controller {
 
     public static Result authentication() {
-        return ok(authentication.render(form(User.class)));
+        return ok(authentication.render(form(SimpleUser.class)));
     }
-
 
     @Transactional
     public static Result login() {
-        Form<User> formUser = Form.form(User.class).bindFromRequest();
+        Form<SimpleUser> formUser = Form.form(SimpleUser.class).bindFromRequest();
 
         if (formUser.hasErrors()) {
             return badRequest(authentication.render(formUser));
@@ -44,13 +42,12 @@ public class Application extends Controller {
     }
 
     public static Result registration() {
-        return ok(registration.render(form(User.class)));
+        return ok(registration.render(form(SimpleUser.class)));
     }
 
     @Transactional
     public static Result newUser() {
-        Form<User> formUser = Form.form(User.class).bindFromRequest();
-
+        Form<SimpleUser> formUser = Form.form(SimpleUser.class).bindFromRequest();
         if (formUser.hasErrors()) {
             System.out.println("error");
             return badRequest(registration.render(formUser));
@@ -60,15 +57,15 @@ public class Application extends Controller {
         }
     }
 
-    private static User findUser(String userName, String password) {
+    private static SimpleUser findUser(String userName, String password) {
         EntityManager em = play.db.jpa.JPA.em();
-        String queryString = "SELECT u FROM User u where u.name = :name and u.password = :password";
+        String queryString = "SELECT u FROM SimpleUser u where u.name = :name and u.password = :password";
 
-        TypedQuery<User> query = em.createQuery(queryString, User.class).
+        TypedQuery<SimpleUser> query = em.createQuery(queryString, SimpleUser.class).
                 setParameter("name", userName).
                 setParameter("password", password);
 
-        List<User> results = query.getResultList();
+        List<SimpleUser> results = query.getResultList();
         if (results.isEmpty()) {
             return null;
         } else {

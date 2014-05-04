@@ -1,5 +1,6 @@
 package models;
 
+
 import play.data.format.Formats;
 import play.data.validation.Constraints;
 import play.data.validation.ValidationError;
@@ -13,8 +14,9 @@ import java.util.List;
  * Created by Elisabeth on 03.05.2014.
  */
 @Entity
+//@Table(name = "user")
 @Access(AccessType.FIELD)
-public class User implements at.ac.tuwien.big.we14.lab2.api.User{
+public class SimpleUser implements at.ac.tuwien.big.we14.lab2.api.User{
 
     @Id
     @Constraints.Required(message = "Der Benutzername ist ein Pflichtfeld!")
@@ -38,10 +40,10 @@ public class User implements at.ac.tuwien.big.we14.lab2.api.User{
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
-    public User() {
+    public SimpleUser() {
     }
 
-    public User(String name, String password) {
+    public SimpleUser(String name, String password) {
         this.name = name;
         this.password = password;
     }
