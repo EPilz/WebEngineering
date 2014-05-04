@@ -17,8 +17,15 @@ import java.util.List;
 public class User implements at.ac.tuwien.big.we14.lab2.api.User{
 
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private long id;
+    @Constraints.Required(message = "Der Benutzername ist ein Pflichtfeld!")
+    @Constraints.MinLength(value = 4, message = "Der Benutzername muss mindestens 4 Zeichen lang sein!")
+    @Constraints.MaxLength(value = 8, message = "Der Benutzername darf maximal 8 Zeichen enthalten!")
+    private String name;
+
+    @Constraints.Required(message = "Das Passwort ist ein Pflichtfeld!")
+    @Constraints.MinLength(value = 4, message = "Das Passwort muss mindestens 4 Zeichen lang sein!")
+    @Constraints.MaxLength(value = 8, message = "Das Passwort darf maximal 8 Zeichen enthalten!")
+    private String password;
 
     private String firstname;
 
@@ -31,30 +38,12 @@ public class User implements at.ac.tuwien.big.we14.lab2.api.User{
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
-    @Constraints.Required
-    @Constraints.MinLength(4)
-    @Constraints.MaxLength(8)
-    private String name;
-
-    @Constraints.Required
-    @Constraints.MinLength(4)
-    @Constraints.MaxLength(8)
-    private String password;
-
     public User() {
     }
 
     public User(String name, String password) {
         this.name = name;
         this.password = password;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getFirstname() {

@@ -23,9 +23,6 @@ public class Application extends Controller {
         return ok(authentication.render(form(User.class)));
     }
 
-    public static Result index() {
-        return ok(index.render());
-    }
 
     @Transactional
     public static Result login() {
@@ -38,16 +35,12 @@ public class Application extends Controller {
                 System.out.println(formUser.get().getName());
                 session().clear();
                 session("userName", formUser.get().getName());
-                return redirect(routes.Application.index());
+                return redirect(routes.QuizController.index());
             } else {
-                formUser.reject("formError", "kein gueltiger Login");
-             //   formUser.errors().put());
+                formUser.reject("formError", "kein gültiger Login");
                 return badRequest(authentication.render(formUser));
             }
-
         }
-
-
     }
 
     public static Result registration() {
@@ -59,16 +52,12 @@ public class Application extends Controller {
         Form<User> formUser = Form.form(User.class).bindFromRequest();
 
         if (formUser.hasErrors()) {
-            return badRequest(registration.render(form(User.class)));
+            System.out.println("error");
+            return badRequest(registration.render(formUser));
         } else {
             JPA.em().persist(formUser.get());
             return redirect(routes.Application.authentication());
         }
-
-           /* System.out.println(formUser.get().getGender());
-            System.out.println(formUser.get().getBirthdate());*/
-
-
     }
 
     private static User findUser(String userName, String password) {

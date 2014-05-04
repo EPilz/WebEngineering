@@ -20,6 +20,7 @@
         <section role="main" id="register" aria-labelledby="registerheading">
             <!-- Register section -->
             <h2 id="registerheading" class="accessibility">Registrierung</h2>
+            @import views.formView._
             @helper.form(routes.Application.newUser()) {
                 <fieldset>
                     <legend>Persönliche Daten</legend>
@@ -27,7 +28,7 @@
                     @helper.inputText(form("lastname"), 'id -> "lastname", '_label -> "Nachname:")
 
                     @helper.inputDate(form("birthdate"), 'id -> "birthdate", '_showConstraints -> false, '_label -> "Geburtstag:")
-                    @helper.select(form("gender"), options = Seq(("MALE"->"Männlich"), ("FEMALE"->"Weiblich")), '_label -> "Geschlecht:")
+                    @helper.select(form("gender"), options = Gender.values().toList.map(v => (v.toString, v.text())), '_label -> "Geschlecht:")
                 </fieldset>
                 <fieldset>
                     <legend>Login Daten</legend>
@@ -35,8 +36,8 @@
                         <div id="error_msg_name" class="error" role="alert"> @error.message </div>
                     }
 
-                    @helper.inputText(form("name"), 'id -> "username", 'required -> "required", '_showConstraints -> false, '_label -> "Benutzername*:")
-                    @helper.inputPassword(form("password"), 'id -> "password", 'required -> "required", '_showConstraints -> false, '_label -> "Passwort*:")
+                    @helper.inputText(form("name"), 'id -> "username", '_showConstraints -> false, '_label -> "Benutzername*:")(textInput, implicitly[Lang])
+                    @helper.inputPassword(form("password"), 'id -> "password", '_showConstraints -> false, '_label -> "Passwort*:")(textInput, implicitly[Lang])
 
                     <input id="registersubmit" type="submit" value="Registrieren" accesskey="s"/>
                     <p id="requiredhint">Mit "*" gekennzeichnete Felder sind Pflichtfelder</p>
