@@ -1,17 +1,16 @@
 package controllers;
 
-import at.ac.tuwien.big.we14.lab2.api.User;
 import models.SimpleUser;
 import play.data.Form;
 import play.db.jpa.JPA;
 import play.db.jpa.Transactional;
-import play.mvc.*;
-
-import views.html.*;
+import play.mvc.Controller;
+import play.mvc.Result;
+import views.html.authentication;
+import views.html.registration;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
-
 import java.util.List;
 
 import static play.data.Form.form;
@@ -29,7 +28,7 @@ public class Application extends Controller {
         if (formUser.hasErrors()) {
             return badRequest(authentication.render(formUser));
         } else {
-            if(findUser(formUser.get().getName(), formUser.get().getPassword()) != null) {
+            if (findUser(formUser.get().getName(), formUser.get().getPassword()) != null) {
                 System.out.println(formUser.get().getName());
                 session().clear();
                 session("userName", formUser.get().getName());
@@ -56,6 +55,7 @@ public class Application extends Controller {
             return redirect(routes.Application.authentication());
         }
     }
+
 
     private static SimpleUser findUser(String userName, String password) {
         EntityManager em = play.db.jpa.JPA.em();
