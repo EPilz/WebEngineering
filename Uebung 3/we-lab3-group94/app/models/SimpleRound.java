@@ -34,6 +34,9 @@ public class SimpleRound implements Round {
     public void initialize(List<User> users, List<Question> questions) {
         this.users = users;
         this.questions = questions;
+        for (User u : users) {
+            answers.put(u, new ArrayList<Answer>());
+        }
     }
 
     @Override
@@ -61,6 +64,9 @@ public class SimpleRound implements Round {
 
     @Override
     public Question getCurrentQuestion(User user) {
+        System.out.print(user);
+        System.out.print(answers);
+        System.out.println();
         int currentQ = answers.get(user).size();
         if(currentQ == questions.size()) {
             return null;

@@ -1,11 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
+@(quizGame: SimpleQuizGame)
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
     <head>
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Business Informatics Group Quiz</title>
-        <link rel="stylesheet" type="text/css" href="style/screen.css" />
+        <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/main.css")" />
         <script src="js/jquery.js" type="text/javascript"></script>
         <script src="js/framework.js" type="text/javascript"></script>
     </head>
@@ -47,12 +48,11 @@
                 
                 <form id="questionform" action="question.html" method="post">
                     <h2 id="questionheading" class="accessibility">Frage</h2>
-                    <p id="questiontext">Welche zwei LVAs werden im Model EWA zusammengefasst?</p>
+                    <p id="questiontext">@quizGame.getCurrentRound().getCurrentQuestion(quizGame.getPlayers().get(0)).getText</p>
                     <ul id="answers">
-                        <li><input id="option1" type="checkbox"/><label for="option1">IT Strategie</label></li>
-                        <li><input id="option2" type="checkbox"/><label for="option2">Web Engineering</label></li>
-                        <li><input id="option3" type="checkbox"/><label for="option3">Semistrukturierte Daten</label></li>
-                        <li><input id="option4" type="checkbox"/><label for="option4">Objektorientierte Modellierung</label></li>
+                        @for(choice <- quizGame.getCurrentRound().getCurrentQuestion(quizGame.getPlayers().get(0)).getAllChoices()) {
+                            <li><input id="option@choice.getId()" type="checkbox"/><label for="option@choice.getId()">@choice.getText()</label></li>
+                        }
                     </ul>
                     <input id="timeleftvalue" type="hidden" value="100"/>
                     <input id="next" type="submit" value="weiter" accesskey="s"/>

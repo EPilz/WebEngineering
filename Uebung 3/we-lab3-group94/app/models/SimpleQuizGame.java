@@ -100,6 +100,10 @@ public class SimpleQuizGame implements at.ac.tuwien.big.we14.lab2.api.QuizGame {
         return users;
     }
 
+    public void addPlayer(User user) {
+        users.add(user);
+    }
+
     @Override
     public int getWonRounds(User user) {
         int count = 0;
