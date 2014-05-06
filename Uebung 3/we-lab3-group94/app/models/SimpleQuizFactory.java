@@ -37,7 +37,7 @@ public abstract class SimpleQuizFactory extends QuizFactory {
 
     @Override
     public QuizGame createQuizGame() {
-        return new SimpleQuizGame();
+        return new SimpleQuizGame(this);
     }
 
     @Override

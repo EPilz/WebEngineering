@@ -114,4 +114,44 @@ public class SimpleUser implements at.ac.tuwien.big.we14.lab2.api.User {
         }
         return errors;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof SimpleUser)) return false;
+
+        SimpleUser that = (SimpleUser) o;
+
+        if (birthdate != null ? !birthdate.equals(that.birthdate) : that.birthdate != null) return false;
+        if (firstname != null ? !firstname.equals(that.firstname) : that.firstname != null) return false;
+        if (gender != that.gender) return false;
+        if (lastname != null ? !lastname.equals(that.lastname) : that.lastname != null) return false;
+        if (name != null ? !name.equals(that.name) : that.name != null) return false;
+        if (password != null ? !password.equals(that.password) : that.password != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = name != null ? name.hashCode() : 0;
+        result = 31 * result + (password != null ? password.hashCode() : 0);
+        result = 31 * result + (firstname != null ? firstname.hashCode() : 0);
+        result = 31 * result + (lastname != null ? lastname.hashCode() : 0);
+        result = 31 * result + (birthdate != null ? birthdate.hashCode() : 0);
+        result = 31 * result + (gender != null ? gender.hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "SimpleUser{" +
+                "name='" + name + '\'' +
+                ", password='" + password + '\'' +
+                ", firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", birthdate=" + birthdate +
+                ", gender=" + gender +
+                '}';
+    }
 }
