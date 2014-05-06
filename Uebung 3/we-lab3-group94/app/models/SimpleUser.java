@@ -4,6 +4,7 @@ package models;
 import play.data.format.Formats;
 import play.data.validation.Constraints;
 import play.data.validation.ValidationError;
+import play.i18n.Messages;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -16,24 +17,23 @@ import java.util.List;
 @Entity
 //@Table(name = "user")
 @Access(AccessType.FIELD)
-public class SimpleUser implements at.ac.tuwien.big.we14.lab2.api.User{
+public class SimpleUser implements at.ac.tuwien.big.we14.lab2.api.User {
+
+    private static final String TEXT = Messages.get("required.userName");
 
     @Id
-    @Constraints.Required(message = "Der Benutzername ist ein Pflichtfeld!")
-    @Constraints.MinLength(value = 4, message = "Der Benutzername muss mindestens 4 Zeichen lang sein!")
-    @Constraints.MaxLength(value = 8, message = "Der Benutzername darf maximal 8 Zeichen enthalten!")
-    private String name;
+    private String userName;
 
-    @Constraints.Required(message = "Das Passwort ist ein Pflichtfeld!")
-    @Constraints.MinLength(value = 4, message = "Das Passwort muss mindestens 4 Zeichen lang sein!")
-    @Constraints.MaxLength(value = 8, message = "Das Passwort darf maximal 8 Zeichen enthalten!")
+ /*   @Constraints.Required //(message = "Das Passwort ist ein Pflichtfeld!")
+    @Constraints.MinLength(value = 4)//, message = "Das Passwort muss mindestens 4 Zeichen lang sein!")
+    @Constraints.MaxLength(value = 8) // message = "Das Passwort darf maximal 8 Zeichen enthalten!")*/
     private String password;
 
     private String firstname;
 
     private String lastname;
 
-    @Formats.DateTime(pattern="dd.MM.yyyy")
+    @Formats.DateTime(pattern = "dd.MM.yyyy")
     @Temporal(TemporalType.DATE)
     private Date birthdate;
 
@@ -44,7 +44,7 @@ public class SimpleUser implements at.ac.tuwien.big.we14.lab2.api.User{
     }
 
     public SimpleUser(String name, String password) {
-        this.name = name;
+        this.userName = name;
         this.password = password;
     }
 
@@ -89,12 +89,19 @@ public class SimpleUser implements at.ac.tuwien.big.we14.lab2.api.User{
     }
 
     public String getName() {
-        return name;
+        return userName;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.userName = name;
     }
 
-
+    public List<ValidationError> validate() {
+        List<ValidationError> errors = null;
+        if (userName == null || userName.isEmpty()) {
+            errors = new ArrayList<ValidationError>();
+            errors.add(new ValidationError("username", Messages.get("required.username")));
+        }
+        return errors;
+    }
 }

@@ -5,16 +5,16 @@
     <head>
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Business Informatics Group Quiz - Login</title>
+        <title>@Messages("head.title")</title>
         <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/main.css")"/>
     </head>
     <body id="loginpage">
-        <a class="accessibility" href="#login">Zum Login springen</a>
-        <header role="banner" aria-labelledby="mainheading"><h1 id="mainheading"><span class="accessibility">Business Informatics Group</span> Quiz</h1></header>
+        <a class="accessibility" href="#login">@Messages("loginpage.accessibility")</a>
+        <header role="banner" aria-labelledby="mainheading"><h1 id="mainheading"><span class="accessibility">@Messages("header.banner")</span> @Messages("quiz")</h1></header>
         <nav role="navigation" aria-labelledby="navheading">
-            <h2 id="navheading" class="accessibility">Navigation</h2>
+            <h2 id="navheading" class="accessibility">@Messages("loginpage")</h2>
             <ul>
-                <li><a id="registerlink" title="Klicke hier um dich zu registrieren" href="register.html" accesskey="r">Registrieren</a></li>
+                <li><a id="registerlink" title="@Messages("registerlink")" href="register.html" accesskey="r">@Messages("navigation")</a></li>
             </ul>
         </nav>
         <!-- Login section -->
@@ -23,21 +23,21 @@
                 @import views.formView._
                 @helper.form(routes.Application.login()) {
                     <fieldset>
-                        <legend id="loginheading">Login</legend>
+                        <legend id="loginheading">@Messages("Login")</legend>
                         @for(error <- form("formError").errors) {
                             <div id="error_msg_name" class="error" role="alert"> @error.message </div>
                         }
-                        @helper.inputText(form("name"), 'id -> "username", 'required -> "required", '_showConstraints -> false, '_label -> "Benutzername:")(textInput, implicitly[Lang])
-                        @helper.inputPassword(form("password"), 'id -> "password", 'required -> "required", '_showConstraints -> false, '_label -> "Passwort:")(textInput, implicitly[Lang])
-                        <input id="loginsubmit" type="submit" value="Anmelden"/>
+                        @helper.inputText(form("username"), 'id -> "username", '_showConstraints -> false, '_label -> Messages("userName"))(textInput, implicitly[Lang])
+                        @helper.inputPassword(form("password"), 'id -> "password", '_showConstraints -> false, '_label -> Messages("password"))(textInput, implicitly[Lang])
+                        <input id="loginsubmit" type="submit" value="@Messages("LoginButton")"/>
                     </fieldset>
                 }
             </section>
             <!-- Register section -->
             <section id="register" aria-labelledby="registerheading">
-                <h2 id="registerheading" class="accessibility">Registrierung</h2>
-                <p>Nicht registriert?</p>
-                <a href="@routes.Application.registration()">Zur Registierung</a>
+                <h2 id="registerheading" class="accessibility">@Messages("register")</h2>
+                <p>@Messages("not.register")</p>
+                <a href="@routes.Application.registration()">@Messages("for.register")</a>
             </section>
         </section>
 

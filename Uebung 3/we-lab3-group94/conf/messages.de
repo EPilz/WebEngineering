@@ -1,0 +1,15 @@
+head.title = Business Informatics Group Quiz - Login
+header.banner = Business Informatics Group
+quiz = Quiz
+loginpage = Zum Login springen
+navigation = Navigation
+registerlink = Klicke hier um dich zu registrieren
+login = Login
+userName = Benutzername:
+password = Passwort:
+LoginButton = Anmelden
+register = Registierung
+not.register = Nicht registriert?
+for.register = Zur Registierung
+
+required.username = Der Benutzername ist ein Pflichtfeld!

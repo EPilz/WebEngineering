@@ -59,10 +59,10 @@ public class Application extends Controller {
 
     private static SimpleUser findUser(String userName, String password) {
         EntityManager em = play.db.jpa.JPA.em();
-        String queryString = "SELECT u FROM SimpleUser u where u.name = :name and u.password = :password";
+        String queryString = "SELECT u FROM SimpleUser u where u.userName = :userName and u.password = :password";
 
         TypedQuery<SimpleUser> query = em.createQuery(queryString, SimpleUser.class).
-                setParameter("name", userName).
+                setParameter("userName", userName).
                 setParameter("password", password);
 
         List<SimpleUser> results = query.getResultList();
