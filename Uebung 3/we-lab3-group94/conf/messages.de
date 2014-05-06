@@ -1,3 +1,5 @@
+json.file = data.de.json
+
 head.title = Business Informatics Group Quiz - Login
 header.banner = Business Informatics Group
 quiz = Quiz
@@ -5,7 +7,7 @@ loginpage = Zum Login springen
 navigation = Navigation
 registerlink = Klicke hier um dich zu registrieren
 login = Login
-userName = Benutzername:
+username = Benutzername:
 password = Passwort:
 LoginButton = Anmelden
 register = Registierung
@@ -13,3 +15,9 @@ not.register = Nicht registriert?
 for.register = Zur Registierung
 
 required.username = Der Benutzername ist ein Pflichtfeld!
+toShort.username = Der Benutzername muss mindestens 4 Zeichen haben!
+toLong.username = Der Benutzername darf maximal 8 Zeichen haben!
+
+required.password = Das Passwort ist ein Pflichtfeld!
+toShort.password = Das Passwort muss mindestens 4 Zeichen haben!
+toLong.password = Das Passwort darf maximal 8 Zeichen haben!

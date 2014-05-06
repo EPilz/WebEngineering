@@ -15,18 +15,14 @@ import java.util.List;
  * Created by Elisabeth on 03.05.2014.
  */
 @Entity
-//@Table(name = "user")
 @Access(AccessType.FIELD)
 public class SimpleUser implements at.ac.tuwien.big.we14.lab2.api.User {
 
     private static final String TEXT = Messages.get("required.userName");
 
     @Id
-    private String userName;
+    private String name;
 
- /*   @Constraints.Required //(message = "Das Passwort ist ein Pflichtfeld!")
-    @Constraints.MinLength(value = 4)//, message = "Das Passwort muss mindestens 4 Zeichen lang sein!")
-    @Constraints.MaxLength(value = 8) // message = "Das Passwort darf maximal 8 Zeichen enthalten!")*/
     private String password;
 
     private String firstname;
@@ -44,7 +40,7 @@ public class SimpleUser implements at.ac.tuwien.big.we14.lab2.api.User {
     }
 
     public SimpleUser(String name, String password) {
-        this.userName = name;
+        this.name = name;
         this.password = password;
     }
 
@@ -89,18 +85,32 @@ public class SimpleUser implements at.ac.tuwien.big.we14.lab2.api.User {
     }
 
     public String getName() {
-        return userName;
+        return name;
     }
 
     public void setName(String name) {
-        this.userName = name;
+        this.name = name;
     }
 
     public List<ValidationError> validate() {
-        List<ValidationError> errors = null;
-        if (userName == null || userName.isEmpty()) {
-            errors = new ArrayList<ValidationError>();
-            errors.add(new ValidationError("username", Messages.get("required.username")));
+        List<ValidationError> errors = new ArrayList<ValidationError>();
+        if (name == null || name.isEmpty()) {
+            errors.add(new ValidationError("name", Messages.get("required.username")));
+        } else if(name.length() < 4) {
+            errors.add(new ValidationError("name", Messages.get("toShort.username")));
+        } else if(name.length() > 8) {
+            errors.add(new ValidationError("name", Messages.get("toLong.username")));
+        }
+
+        if (password == null || password.isEmpty()) {
+            errors.add(new ValidationError("password", Messages.get("required.password")));
+        } else if(password.length() < 4) {
+            errors.add(new ValidationError("password", Messages.get("toShort.password")));
+        } else if(password.length() > 8) {
+            errors.add(new ValidationError("password", Messages.get("toLong.password")));
+        }
+        if(errors.isEmpty()) {
+            errors = null;
         }
         return errors;
     }

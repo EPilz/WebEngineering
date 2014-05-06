@@ -1,9 +1,11 @@
 package controllers;
 
 import models.SimpleUser;
+import play.api.Play;
 import play.data.Form;
 import play.db.jpa.JPA;
 import play.db.jpa.Transactional;
+import play.i18n.Messages;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.authentication;
@@ -24,14 +26,13 @@ public class Application extends Controller {
     @Transactional
     public static Result login() {
         Form<SimpleUser> formUser = Form.form(SimpleUser.class).bindFromRequest();
-
+        System.out.println(formUser);
         if (formUser.hasErrors()) {
             return badRequest(authentication.render(formUser));
         } else {
             if (findUser(formUser.get().getName(), formUser.get().getPassword()) != null) {
-                System.out.println(formUser.get().getName());
                 session().clear();
-                session("userName", formUser.get().getName());
+                session("username", formUser.get().getName());
                 return redirect(routes.QuizController.index());
             } else {
                 formUser.reject("formError", "kein gültiger Login");
@@ -42,6 +43,11 @@ public class Application extends Controller {
 
     public static Result registration() {
         return ok(registration.render(form(SimpleUser.class)));
+    }
+
+    public static Result logout() {
+        session().clear();
+        return redirect(routes.Application.authentication());
     }
 
     @Transactional
@@ -59,10 +65,10 @@ public class Application extends Controller {
 
     private static SimpleUser findUser(String userName, String password) {
         EntityManager em = play.db.jpa.JPA.em();
-        String queryString = "SELECT u FROM SimpleUser u where u.userName = :userName and u.password = :password";
+        String queryString = "SELECT u FROM SimpleUser u where u.name = :name and u.password = :password";
 
         TypedQuery<SimpleUser> query = em.createQuery(queryString, SimpleUser.class).
-                setParameter("userName", userName).
+                setParameter("name", userName).
                 setParameter("password", password);
 
         List<SimpleUser> results = query.getResultList();

@@ -7,6 +7,7 @@ GET         /                      controllers.Application.authentication()
 POST        /authentication        controllers.Application.login()
 GET         /registration          controllers.Application.registration()
 POST        /registration          controllers.Application.newUser()
+GET         /logout                controllers.Application.logout()
 
 GET         /index                 controllers.QuizController.index()
 # Map static resources from the /public folder to the /assets URL path

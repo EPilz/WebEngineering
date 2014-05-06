@@ -27,7 +27,7 @@
                         @for(error <- form("formError").errors) {
                             <div id="error_msg_name" class="error" role="alert"> @error.message </div>
                         }
-                        @helper.inputText(form("username"), 'id -> "username", '_showConstraints -> false, '_label -> Messages("userName"))(textInput, implicitly[Lang])
+                        @helper.inputText(form("name"), 'id -> "username", '_showConstraints -> false, '_label -> Messages("username"))(textInput, implicitly[Lang])
                         @helper.inputPassword(form("password"), 'id -> "password", '_showConstraints -> false, '_label -> Messages("password"))(textInput, implicitly[Lang])
                         <input id="loginsubmit" type="submit" value="@Messages("LoginButton")"/>
                     </fieldset>
