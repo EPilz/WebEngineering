@@ -8,7 +8,9 @@ navigation = Navigation
 registerlink = Klicke hier um dich zu registrieren
 login = Login
 username = Benutzername:
+usernameRequired = Benutzername*:
 password = Passwort:
+passwordRequired = Passwort*:
 LoginButton = Anmelden
 register = Registierung
 not.register = Nicht registriert?
@@ -21,3 +23,21 @@ toLong.username = Der Benutzername darf maximal 8 Zeichen haben!
 required.password = Das Passwort ist ein Pflichtfeld!
 toShort.password = Das Passwort muss mindestens 4 Zeichen haben!
 toLong.password = Das Passwort darf maximal 8 Zeichen haben!
+
+requiredFields = Mit "*" gekennzeichnete Felder sind Pflichtfelder
+
+personalData = Persönliche Daten
+firstname = Vorname:
+lastname = Nachname:
+birthdate = Geburtstag:
+gender = Geschlecht:
+loginData = Login Daten
+
+startQuiz = Quiz starten
+player1 = Spieler 1
+player2 = Spieler 2
+remainingTime = Verbleibende Zeit:
+lastGame = Letztes Spiel: Nie
+next = weiter
+logout = Abmelden
+

@@ -14,33 +14,33 @@
         <nav role="navigation" aria-labelledby="navheading">
             <h2 id="navheading" class="accessibility">Navigation</h2>
             <ul>
-                <li><a id="loginlink" title="Klicke hier um dich anzumelden" href="#" accesskey="l">Anmelden</a></li>
+                <li><a id="loginlink" title="Klicke hier um dich anzumelden" href="#" accesskey="l">@Messages("LoginButton")</a></li>
             </ul>
         </nav>
         <section role="main" id="register" aria-labelledby="registerheading">
             <!-- Register section -->
-            <h2 id="registerheading" class="accessibility">Registrierung</h2>
+            <h2 id="registerheading" class="accessibility">@Messages("register")</h2>
             @import views.formView._
             @helper.form(routes.Application.newUser()) {
                 <fieldset>
-                    <legend>Persönliche Daten</legend>
-                    @helper.inputText(form("firstname"), 'id -> "firstname", '_label -> "Vorname:")
-                    @helper.inputText(form("lastname"), 'id -> "lastname", '_label -> "Nachname:")
+                    <legend>@Messages("personalData")</legend>
+                    @helper.inputText(form("firstname"), 'id -> "firstname", '_label -> Messages("firstname"))
+                    @helper.inputText(form("lastname"), 'id -> "lastname", '_label -> Messages("lastname"))
 
-                    @helper.inputDate(form("birthdate"), 'id -> "birthdate", '_showConstraints -> false, '_label -> "Geburtstag:")
-                    @helper.select(form("gender"), options = Gender.values().toList.map(v => (v.toString, v.text())), '_label -> "Geschlecht:")
+                    @helper.inputDate(form("birthdate"), 'id -> "birthdate", '_showConstraints -> false, '_label -> Messages("birthdate"))
+                    @helper.select(form("gender"), options = Gender.values().toList.map(v => (v.toString, v.text())), '_label -> Messages("gender"))
                 </fieldset>
                 <fieldset>
-                    <legend>Login Daten</legend>
+                    <legend>@Messages("loginData")</legend>
                     @for(error <- form("user").errors) {
                         <div id="error_msg_name" class="error" role="alert"> @error.message </div>
                     }
 
-                    @helper.inputText(form("name"), 'id -> "username", '_showConstraints -> false, '_label -> "Benutzername*:")(textInput, implicitly[Lang])
-                    @helper.inputPassword(form("password"), 'id -> "password", '_showConstraints -> false, '_label -> "Passwort*:")(textInput, implicitly[Lang])
+                    @helper.inputText(form("name"), 'id -> "username", '_showConstraints -> false, '_label -> Messages("usernameRequired"))(textInput, implicitly[Lang])
+                    @helper.inputPassword(form("password"), 'id -> "password", '_showConstraints -> false, '_label -> Messages("passwordRequired"))(textInput, implicitly[Lang])
 
                     <input id="registersubmit" type="submit" value="Registrieren" accesskey="s"/>
-                    <p id="requiredhint">Mit "*" gekennzeichnete Felder sind Pflichtfelder</p>
+                    <p id="requiredhint">@Messages("requiredFields")</p>
                 </fieldset>
             }
         </section>
