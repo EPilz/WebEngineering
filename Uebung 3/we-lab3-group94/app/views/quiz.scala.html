@@ -11,7 +11,7 @@
         <script src="js/framework.js" type="text/javascript"></script>
     </head>
     <body id="questionpage">
-        <a class="accessibility" href="#question">Zur Frage springen</a>
+        <a class="accessibility" href="#question">@Messages("jumpQuestion")</a>
         <header role="banner" aria-labelledby="mainheading"><h1 id="mainheading"><span class="accessibility">Business Informatics Group</span> Quiz</h1></header>
         <nav role="navigation" aria-labelledby="navheading">
             <h2 id="navheading" class="accessibility">Navigation</h2>
@@ -23,31 +23,31 @@
         <!-- round info -->
         <section role="main">
             <section id="roundinfo" aria-labelledby="roundinfoheading">
-                <h2 id="roundinfoheading" class="accessibility">Spielerinformationen</h2>
+                <h2 id="roundinfoheading" class="accessibility">@Messages("playerInfo")</h2>
                 <div id="player1info">
                     <span id="player1name">@Messages("player1")</span>
                     <ul class="playerroundsummary">
-                        <li><span class="accessibility">Frage 1:</span><span id="player1answer1" class="correct">Richtig</span></li>
-                        <li><span class="accessibility">Frage 2:</span><span id="player1answer2" class="incorrect">Falsch</span></li>
-                        <li><span class="accessibility">Frage 3:</span><span id="player1answer3" class="unknown">Unbekannt</span></li>
+                        <li><span class="accessibility">@Messages("question") 1:</span><span id="player1answer1" class="correct">@Messages("true")</span></li>
+                        <li><span class="accessibility">@Messages("question") 2:</span><span id="player1answer2" class="incorrect">@Messages("false")</span></li>
+                        <li><span class="accessibility">@Messages("question") 3:</span><span id="player1answer3" class="unknown">@Messages("unknown")</span></li>
                     </ul>
                 </div>
                 <div id="player2info">
                     <span id="player2name">@Messages("player2")</span>
                     <ul class="playerroundsummary">
-                        <li><span class="accessibility">Frage 1:</span><span id="player2answer1" class="correct">Richtig</span></li>
-                        <li><span class="accessibility">Frage 2:</span><span id="player2answer2" class="correct">Richtig</span></li>
-                        <li><span class="accessibility">Frage 3:</span><span id="player2answer3" class="unknown">Unbekannt</span></li>
+                        <li><span class="accessibility">@Messages("question") 1:</span><span id="player2answer1" class="correct">@Messages("true")</span></li>
+                        <li><span class="accessibility">@Messages("question") 2:</span><span id="player2answer2" class="correct">@Messages("true")</span></li>
+                        <li><span class="accessibility">@Messages("question") 3:</span><span id="player2answer3" class="unknown">@Messages("unknown")</span></li>
                     </ul>
                 </div>
-                <div id="currentcategory"><span class="accessibility">Kategorie:</span> Sport</div>
+                <div id="currentcategory"><span class="accessibility">@Messages("category"):</span> Sport</div>
             </section>
             
             <!-- Question -->
             <section id="question" aria-labelledby="questionheading">
                 
                 <form id="questionform" action="question.html" method="post">
-                    <h2 id="questionheading" class="accessibility">Frage</h2>
+                    <h2 id="questionheading" class="accessibility">@Messages("question")</h2>
                     <p id="questiontext">@quizGame.getCurrentRound().getCurrentQuestion(quizGame.getPlayers().get(0)).getText</p>
                     <ul id="answers">
                         @for(choice <- quizGame.getCurrentRound().getCurrentQuestion(quizGame.getPlayers().get(0)).getAllChoices()) {
