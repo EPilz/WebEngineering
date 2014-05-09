@@ -1,4 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
+@(form: Form[SimpleUser])
+@(quizGame: SimpleQuizGame)
+
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
     <head>
@@ -13,9 +16,9 @@
         <a class="accessibility" href="#roundwinner">Zur Spielwertung springen</a>
         <header role="banner" aria-labelledby="mainheading"><h1 id="mainheading"><span class="accessibility">Business Informatics Group</span> Quiz</h1></header>
         <nav role="navigation" aria-labelledby="navheading">
-            <h2 id="navheading" class="accessibility">Navigation</h2>
+            <h2 id="navheading" class="accessibility">@Messages("navigation")</h2>
             <ul>
-                <li><a id="logoutlink" title="Klicke hier um dich abzumelden" href="#" accesskey="l">Abmelden</a></li>
+                <li><a id="logoutlink" title="Klicke hier um dich abzumelden" href="#" accesskey="l">@Messages("logout")</a></li>
             </ul>
         </nav>
         
@@ -23,21 +26,21 @@
             <!-- winner message -->
             <section id="roundwinner" aria-labelledby="roundwinnerheading">
                 <h2 id="roundwinnerheading" class="accessibility">Endstand</h2>
-                <p class="roundwinnermessage">Spieler 2 gewinnt!</p>
+                <p class="roundwinnermessage">@quizGame.getWinner() gewinnt!</p>
             </section>
         
             <!-- round info -->    
             <section id="roundinfo" aria-labelledby="roundinfoheading">
                 <h2 id="roundinfoheading" class="accessibility">Spielerinformationen</h2>
                 <div id="player1info" class="playerinfo">
-                    <span id="player1name" class="playername">Spieler 1</span>
-                    <p id="player1roundcounter" class="playerroundcounter">Gewonnene Runden: <span id="player1wonrounds" class="playerwonrounds">2</span></p>
+                    <span id="player1name" class="playername">@Messages("player1")</span>
+                    <p id="player1roundcounter" class="playerroundcounter">Gewonnene Runden: <span id="player1wonrounds" class="playerwonrounds">@quizGame.getWonRounds(quizGame.getPlayers().get(0))</span></p>
                 </div>
                 <div id="player2info" class="playerinfo">
-                    <span id="player2name" class="playername">Spieler 2</span>
-                    <p id="player2roundcounter" class="playerroundcounter">Gewonnene Runden: <span id="player2wonrounds" class="playerwonrounds">1</span></p>
+                    <span id="player2name" class="playername">@Messages("player2")</span>
+                    <p id="player2roundcounter" class="playerroundcounter">Gewonnene Runden: <span id="player2wonrounds" class="playerwonrounds">@quizGame.getWonRounds(quizGame.getPlayers().get(1))</span></p>
                 </div>
-                <a id="next" href="question.html" accesskey="n">Neues Spiel</a>
+                <a id="next" href="question.html" accesskey="n">@Messages("newGame")</a>
             </section>
         </section>
        

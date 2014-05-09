@@ -26,7 +26,7 @@ toLong.password = Das Passwort darf maximal 8 Zeichen haben!
 
 requiredFields = Mit "*" gekennzeichnete Felder sind Pflichtfelder
 
-personalData = Persönliche Daten
+personalData = Persï¿½nliche Daten
 firstname = Vorname:
 lastname = Nachname:
 birthdate = Geburtstag:
@@ -40,4 +40,4 @@ remainingTime = Verbleibende Zeit:
 lastGame = Letztes Spiel: Nie
 next = weiter
 logout = Abmelden
-
+newGame = neues Spiel
