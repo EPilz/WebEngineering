@@ -3,7 +3,7 @@
     <label for="@elements.id">@elements.label</label>
     @elements.input
     @if(elements.hasErrors) {
-        <div id="errors" role="alert">@elements.errors.mkString(", ")</div>
+        <div id="errors" role="alert">@Messages("birthdateFormat")</div>
 
     }
     <span class="help">@elements.infos.mkString(", ")</span>

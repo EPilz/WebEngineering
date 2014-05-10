@@ -1,4 +1,4 @@
-@(form: Form[User])
+@(form: Form[models.User])
 
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
@@ -16,7 +16,7 @@
         <nav role="navigation" aria-labelledby="navheading">
             <h2 id="navheading" class="accessibility">Navigation</h2>
             <ul>
-                <li><a id="loginlink" title="Klicke hier um dich anzumelden" href="#" accesskey="l">@Messages("LoginButton")</a></li>
+                <li><a id="loginlink" title="@Messages("loginlink")" href="@routes.Application.authentication()" accesskey="l">@Messages("LoginButton")</a></li>
             </ul>
         </nav>
         <section role="main" id="register" aria-labelledby="registerheading">
@@ -29,19 +29,20 @@
                     @helper.inputText(form("firstname"), 'id -> "firstname", '_label -> Messages("firstname"))
                     @helper.inputText(form("lastname"), 'id -> "lastname", '_label -> Messages("lastname"))
 
-                    @helper.inputDate(form("birthdate"), 'id -> "birthdate", '_showConstraints -> false, '_label -> Messages("birthdate"))
+                    @helper.inputDate(form("birthdate"), 'id -> "birthdate", '_error -> Messages("birthdateFormat"), '_label -> Messages("birthdate"))(dateInput, implicitly[Lang])
+
                     @helper.select(form("gender"), options = Gender.values().toList.map(v => (v.toString, v.text())), '_label -> Messages("gender"))
                 </fieldset>
                 <fieldset>
                     <legend>@Messages("loginData")</legend>
-                    @for(error <- form("user").errors) {
+                    @for(error <- form("formError").errors) {
                         <div id="error_msg_name" class="error" role="alert"> @error.message </div>
                     }
 
                     @helper.inputText(form("username"), 'id -> "username", '_showConstraints -> false, '_label -> Messages("usernameRequired"))(textInput, implicitly[Lang])
                     @helper.inputPassword(form("password"), 'id -> "password", '_showConstraints -> false, '_label -> Messages("passwordRequired"))(textInput, implicitly[Lang])
 
-                    <input id="registersubmit" type="submit" value="Registrieren" accesskey="s"/>
+                    <input id="registersubmit" type="submit" value="@Messages("register")" accesskey="s"/>
                     <p id="requiredhint">@Messages("requiredFields")</p>
                 </fieldset>
             }

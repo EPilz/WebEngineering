@@ -6,6 +6,8 @@ quiz = Quiz
 loginpage = Zum Login springen
 navigation = Navigation
 registerlink = Klicke hier um dich zu registrieren
+loginlink = Klicke hier um dich zu anzumelden
+logoutlink = Klicke hier um dich zu abzumelden
 login = Login
 username = Benutzername:
 usernameRequired = Benutzername*:
@@ -26,7 +28,11 @@ toLong.password = Das Passwort darf maximal 8 Zeichen haben!
 
 requiredFields = Mit "*" gekennzeichnete Felder sind Pflichtfelder
 
-personalData = Persönliche Daten
+passwordUsernameWrong = Benutzername oder Passwort falsch!
+usernameAlreadyExists = Benutzername ist bereits vorhanden!
+birthdateFormat = Verwenden Sie bitte folgendes Datumsformat: dd.mm.yyyy (z.B. 24.12.2012).
+
+personalData = PersÃ¶nliche Daten
 firstname = Vorname:
 lastname = Nachname:
 birthdate = Geburtstag:
@@ -39,7 +45,8 @@ true = Richtig
 false = Falsch
 unknown = Unbekannt
 remainingTime = Verbleibende Zeit:
-lastGame = Letztes Spiel: Nie
+lastGame = Letztes Spiel:
+never = Nie
 next = weiter
 logout = Abmelden
 newGame = neues Spiel

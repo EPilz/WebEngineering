@@ -2,6 +2,7 @@ package views
 
 import views.html.helper._
 import views.html.myTextInput
+import views.html.myDate
 
 /*
 * Some examples of different fields we can create using FieldConstructor.
@@ -12,5 +13,8 @@ import views.html.myTextInput
 object formView {
   implicit val textInput = new FieldConstructor {
     def apply(elements: FieldElements) = myTextInput(elements)
+  }
+  implicit val dateInput = new FieldConstructor {
+    def apply(elements: FieldElements) = myDate(elements)
   }
 }

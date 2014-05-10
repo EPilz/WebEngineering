@@ -70,7 +70,6 @@ public class QuizController extends Controller {
     public static Result roundover() {
         String username = session("username");
         QuizGame quizGame = (QuizGame) Cache.get(username + "Game");
-        User userHuman = quizGame.getPlayers().get(0);
 
         if(quizGame.isGameOver()) {
             User winner = quizGame.getWinner();
@@ -104,11 +103,6 @@ public class QuizController extends Controller {
 
     @Security.Authenticated(QuizSecurity.class)
     public static Result index() {
-        /*if(categories == null) {
-            QuizFactory factory = PlayQuizFactory.init();
-            QuestionDataProvider provider = factory.createQuestionDataProvider();
-            categories = provider.loadCategoryData();
-        }*/
         return ok(index.render());
     }
 }

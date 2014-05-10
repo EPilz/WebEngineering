@@ -1,4 +1,4 @@
-json.file = data.de.json
+json.file = data.en.json
 
 head.title = Business Informatics Group Quiz - Login
 header.banner = Business Informatics Group
@@ -6,6 +6,8 @@ quiz = Quiz
 loginpage = Skip to login
 navigation = Navigation
 registerlink = Click here for registration
+loginlink =  Click here for login
+logoutlink = Click here for logout
 login = Login
 username = Username:
 usernameRequired = Username*:
@@ -26,6 +28,10 @@ toLong.password = Your password must not contain more than 8 characters!
 
 requiredFields = Fields marked with a "*" are required
 
+passwordUsernameWrong = Username or Password wrong!
+usernameAlreadyExists = Benutzername ist already exists!
+birthdateFormat = Please use the following date format: dd.mm.yyyy (z.B. 24.12.2012).
+
 personalData = Personal Data
 firstname = First name:
 lastname = Last name:
@@ -39,7 +45,8 @@ true = True
 false = False
 unknown = Unknown
 remainingTime = Remaining Time:
-lastGame = Last Game: Never
+lastGame = Last Game:
+never = Never
 next = next
 logout = Logout
 newGame = new Game

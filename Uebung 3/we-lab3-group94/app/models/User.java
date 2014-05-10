@@ -28,7 +28,6 @@ public class User {
 
     private String lastname;
 
-    @Formats.DateTime(pattern = "dd.MM.yyyy")
     @Temporal(TemporalType.DATE)
     private Date birthdate;
 
@@ -94,11 +93,11 @@ public class User {
     public List<ValidationError> validate() {
         List<ValidationError> errors = new ArrayList<ValidationError>();
         if (username == null || username.isEmpty()) {
-            errors.add(new ValidationError("name", Messages.get("required.username")));
+            errors.add(new ValidationError("username", Messages.get("required.username")));
         } else if(username.length() < 4) {
-            errors.add(new ValidationError("name", Messages.get("toShort.username")));
+            errors.add(new ValidationError("username", Messages.get("toShort.username")));
         } else if(username.length() > 8) {
-            errors.add(new ValidationError("name", Messages.get("toLong.username")));
+            errors.add(new ValidationError("username", Messages.get("toLong.username")));
         }
 
         if (password == null || password.isEmpty()) {
