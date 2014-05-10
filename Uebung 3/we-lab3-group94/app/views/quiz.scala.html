@@ -1,4 +1,4 @@
-@(quizGame: SimpleQuizGame)
+@(quizGame: at.ac.tuwien.big.we14.lab2.api.QuizGame)
 
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
@@ -7,8 +7,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Business Informatics Group Quiz</title>
         <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/main.css")" />
-        <script src="js/jquery.js" type="text/javascript"></script>
-        <script src="js/framework.js" type="text/javascript"></script>
+        <script src="@routes.Assets.at("javascripts/jquery-1.9.0.min.js")" type="text/javascript"></script>
+        <script src="@routes.Assets.at("javascripts/framework.js")" type="text/javascript"></script>
     </head>
     <body id="questionpage">
         <a class="accessibility" href="#question">@Messages("jumpQuestion")</a>
@@ -16,7 +16,7 @@
         <nav role="navigation" aria-labelledby="navheading">
             <h2 id="navheading" class="accessibility">Navigation</h2>
             <ul>
-                <li><a id="logoutlink" title="Klicke hier um dich abzumelden" href="#" accesskey="l">@Messages("logout")</a></li>
+                <li><a id="logoutlink" title="Klicke hier um dich abzumelden" href="@routes.Application.logout()" accesskey="l">@Messages("logout")</a></li>
             </ul>
         </nav>
         
@@ -25,38 +25,62 @@
             <section id="roundinfo" aria-labelledby="roundinfoheading">
                 <h2 id="roundinfoheading" class="accessibility">@Messages("playerInfo")</h2>
                 <div id="player1info">
-                    <span id="player1name">@Messages("player1")</span>
+                    <span id="player1name">@quizGame.getPlayers.get(0).getName()</span>
                     <ul class="playerroundsummary">
-                        <li><span class="accessibility">@Messages("question") 1:</span><span id="player1answer1" class="correct">@Messages("true")</span></li>
-                        <li><span class="accessibility">@Messages("question") 2:</span><span id="player1answer2" class="incorrect">@Messages("false")</span></li>
-                        <li><span class="accessibility">@Messages("question") 3:</span><span id="player1answer3" class="unknown">@Messages("unknown")</span></li>
+                        @for(i <- 0 to 2) {
+                            <li>
+                                <span class="accessibility">@Messages("question") @i :</span>
+                                @if(quizGame.getCurrentRound.getAnswer(i, quizGame.getPlayers.get(0)) == null) {
+                                    <span id="player1answer@i" class="unknown">@Messages("unknown")</span>
+                                } else {
+                                    @if(quizGame.getCurrentRound.getAnswer(i, quizGame.getPlayers.get(0)).isCorrect()) {
+                                        <span id="player1answer@i" class="correct">@Messages("true")</span>
+                                    } else {
+                                        <span id="player1answer@i" class="incorrect">@Messages("false")</span>
+                                    }
+                                }
+                            </li>
+                        }
                     </ul>
                 </div>
                 <div id="player2info">
-                    <span id="player2name">@Messages("player2")</span>
+                    <span id="player2name">@quizGame.getPlayers.get(1).getName()</span>
                     <ul class="playerroundsummary">
-                        <li><span class="accessibility">@Messages("question") 1:</span><span id="player2answer1" class="correct">@Messages("true")</span></li>
-                        <li><span class="accessibility">@Messages("question") 2:</span><span id="player2answer2" class="correct">@Messages("true")</span></li>
-                        <li><span class="accessibility">@Messages("question") 3:</span><span id="player2answer3" class="unknown">@Messages("unknown")</span></li>
+                        @for(i <- 0 to 2) {
+                            <li>
+                                <span class="accessibility">@Messages("question") @i :</span>
+                                @if(quizGame.getCurrentRound.getAnswer(i, quizGame.getPlayers.get(1)) == null) {
+                                    <span id="player2answer@i" class="unknown">@Messages("unknown")</span>
+                                } else {
+                                    @if(quizGame.getCurrentRound.getAnswer(i, quizGame.getPlayers.get(1)).isCorrect()) {
+                                        <span id="player2answer@i" class="correct">@Messages("true")</span>
+                                    } else {
+                                        <span id="player2answer@i" class="incorrect">@Messages("false")</span>
+                                    }
+                                }
+                            </li>
+                        }
                     </ul>
                 </div>
-                <div id="currentcategory"><span class="accessibility">@Messages("category"):</span> Sport</div>
+                <div id="currentcategory"><span class="accessibility">@Messages("category"):</span> @quizGame.getCurrentRound.getQuestions().get(0).getCategory().getName</div>
             </section>
             
             <!-- Question -->
             <section id="question" aria-labelledby="questionheading">
-                
-                <form id="questionform" action="question.html" method="post">
+                @helper.form(routes.QuizController.quiz(), 'id -> "questionform") {
                     <h2 id="questionheading" class="accessibility">@Messages("question")</h2>
-                    <p id="questiontext">@quizGame.getCurrentRound().getCurrentQuestion(quizGame.getPlayers().get(0)).getText</p>
+                    <p id="questiontext">@quizGame.getCurrentRound.getCurrentQuestion(quizGame.getPlayers.get(0)).getText()</p>
                     <ul id="answers">
-                        @for(choice <- quizGame.getCurrentRound().getCurrentQuestion(quizGame.getPlayers().get(0)).getAllChoices()) {
-                            <li><input id="option@choice.getId()" type="checkbox"/><label for="option@choice.getId()">@choice.getText()</label></li>
+                        @for(choice <- quizGame.getCurrentRound.getCurrentQuestion(quizGame.getPlayers.get(0)).getAllChoices()) {
+                            <li>
+                                <input id="option@choice.getId()" name="option@choice.getId()" type="checkbox"/>
+                                <label for="option@choice.getId()">@choice.getText()</label>
+                            </li>
                         }
                     </ul>
-                    <input id="timeleftvalue" type="hidden" value="100"/>
+                    <input id="timeleftvalue" name="timeleftvalue" type="hidden" value="100"/>
                     <input id="next" type="submit" value="weiter" accesskey="s"/>
-                </form>
+                }
             </section>
             
             <section id="timer" aria-labelledby="timerheading">

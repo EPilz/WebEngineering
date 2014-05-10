@@ -1,11 +1,11 @@
 package controllers;
 
-import models.SimpleUser;
-import play.api.Play;
+import at.ac.tuwien.big.we14.lab2.api.QuizGame;
+import models.User;
+import play.cache.Cache;
 import play.data.Form;
 import play.db.jpa.JPA;
 import play.db.jpa.Transactional;
-import play.i18n.Messages;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.authentication;
@@ -20,19 +20,19 @@ import static play.data.Form.form;
 public class Application extends Controller {
 
     public static Result authentication() {
-        return ok(authentication.render(form(SimpleUser.class)));
+        return ok(authentication.render(form(User.class)));
     }
 
     @Transactional
     public static Result login() {
-        Form<SimpleUser> formUser = Form.form(SimpleUser.class).bindFromRequest();
+        Form<User> formUser = Form.form(User.class).bindFromRequest();
         System.out.println(formUser);
         if (formUser.hasErrors()) {
             return badRequest(authentication.render(formUser));
         } else {
-            if (findUser(formUser.get().getName(), formUser.get().getPassword()) != null) {
+            if (findUser(formUser.get().getUsername(), formUser.get().getPassword()) != null) {
                 session().clear();
-                session("username", formUser.get().getName());
+                session("username", formUser.get().getUsername());
                 return redirect(routes.QuizController.index());
             } else {
                 formUser.reject("formError", "kein gültiger Login");
@@ -42,17 +42,19 @@ public class Application extends Controller {
     }
 
     public static Result registration() {
-        return ok(registration.render(form(SimpleUser.class)));
+        return ok(registration.render(form(User.class)));
     }
 
     public static Result logout() {
+        String username = session("username");
+        Cache.remove(username + "Game");
         session().clear();
         return redirect(routes.Application.authentication());
     }
 
     @Transactional
     public static Result newUser() {
-        Form<SimpleUser> formUser = Form.form(SimpleUser.class).bindFromRequest();
+        Form<User> formUser = Form.form(User.class).bindFromRequest();
         if (formUser.hasErrors()) {
             System.out.println("error");
             return badRequest(registration.render(formUser));
@@ -62,16 +64,15 @@ public class Application extends Controller {
         }
     }
 
-
-    private static SimpleUser findUser(String userName, String password) {
+    private static User findUser(String userName, String password) {
         EntityManager em = play.db.jpa.JPA.em();
-        String queryString = "SELECT u FROM SimpleUser u where u.name = :name and u.password = :password";
+        String queryString = "SELECT u FROM User u where u.username = :username and u.password = :password";
 
-        TypedQuery<SimpleUser> query = em.createQuery(queryString, SimpleUser.class).
-                setParameter("name", userName).
+        TypedQuery<User> query = em.createQuery(queryString, User.class).
+                setParameter("username", userName).
                 setParameter("password", password);
 
-        List<SimpleUser> results = query.getResultList();
+        List<User> results = query.getResultList();
         if (results.isEmpty()) {
             return null;
         } else {

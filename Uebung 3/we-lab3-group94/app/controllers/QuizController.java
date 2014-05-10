@@ -1,66 +1,108 @@
 package controllers;
 
 import at.ac.tuwien.big.we14.lab2.api.*;
-import models.PlayQuizFactory;
-import models.SimpleQuizGame;
-import models.SimpleUser;
-import play.mvc.Http.Context;
+import at.ac.tuwien.big.we14.lab2.api.impl.PlayQuizFactory;
+import at.ac.tuwien.big.we14.lab2.api.impl.SimpleUser;
+import play.cache.Cache;
+import play.data.DynamicForm;
+import play.data.Form;
+import play.i18n.Messages;
+import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
 import views.html.index;
 import views.html.quiz;
+import views.html.quizover;
+import views.html.roundover;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Elisabeth on 04.05.2014.
  */
-public class QuizController extends Security.Authenticator {
+public class QuizController extends Controller {
 
-    public static final int NUM_ROUNDS = 5;
-    public static final int NUM_QUESTIONS = 3;
-
-    //private static List<Category> categories;
-
-    @Override
-    public String getUsername(Context context) {
-        return context.session().get("username");
-    }
-
-    @Override
-    public Result onUnauthorized(Context ctx) {
-        return redirect(routes.Application.authentication());
-
-    }
-
-    @Security.Authenticated(QuizController.class)
+    @Security.Authenticated(QuizSecurity.class)
     public static Result startGame() {
-        QuizFactory quizFactory = PlayQuizFactory.init();
+        String username = session("username");
+        User userHuman = new SimpleUser();
+        userHuman.setName(username);
+
+        String path = "conf/" +  Messages.get("json.file");
+        QuizFactory quizFactory = new PlayQuizFactory(path, userHuman);
+
         QuizGame quizGame = quizFactory.createQuizGame();
-        User u = new SimpleUser();
-        u.setName("PPPP 1");
-        User u1 = new SimpleUser();
-        u1.setName("PPPP 1");
-
-        ((SimpleQuizGame) quizGame).addPlayer(u);
-        ((SimpleQuizGame) quizGame).addPlayer(u1);
-
         quizGame.startNewRound();
+        Cache.set(userHuman.getName() + "Game", quizGame);
 
-        return ok(quiz.render((SimpleQuizGame)quizGame));
+        return ok(quiz.render(quizGame));
     }
 
-    @Security.Authenticated(QuizController.class)
+    @Security.Authenticated(QuizSecurity.class)
     public static Result quiz() {
-        QuizFactory quizFactory = PlayQuizFactory.init();
-        QuizGame quizGame = quizFactory.createQuizGame();
+        DynamicForm form = Form.form().bindFromRequest();
 
-        quizGame.startNewRound();
+        String username = session("username");
+        QuizGame quizGame = (QuizGame) Cache.get(username + "Game");
+        User userHuman = quizGame.getPlayers().get(0);
 
-        return ok(quiz.render((SimpleQuizGame)quizGame));
+        Question question = quizGame.getCurrentRound().getCurrentQuestion(userHuman);
+        List<Choice> choices = new ArrayList<Choice>();
+        for (Choice c : question.getAllChoices()) {
+            String valueChoice = form.data().get("option" + c.getId());
+            if (valueChoice != null && valueChoice.equals("on")) {
+                choices.add(c);
+            }
+        }
+
+        long time = Long.valueOf(form.data().get("timeleftvalue"));
+        quizGame.answerCurrentQuestion(userHuman, choices, time);
+
+        if(quizGame.isRoundOver())  {
+            return roundover();
+        } else {
+            return ok(quiz.render(quizGame));
+        }
     }
 
-    @Security.Authenticated(QuizController.class)
+    @Security.Authenticated(QuizSecurity.class)
+    public static Result roundover() {
+        String username = session("username");
+        QuizGame quizGame = (QuizGame) Cache.get(username + "Game");
+        User userHuman = quizGame.getPlayers().get(0);
+
+        if(quizGame.isGameOver()) {
+            User winner = quizGame.getWinner();
+            String winnerText = "";
+            if(winner == null) {
+                winnerText = Messages.get("undecidedGame");
+            } else {
+                winnerText = Messages.get("userGameWins", winner.getName());
+            }
+            return ok(quizover.render(quizGame, winnerText));
+        } else {
+            User winner = quizGame.getCurrentRound().getRoundWinner();
+            String winnerText = "";
+
+            if(winner == null) {
+                winnerText = Messages.get("undecidedRound", quizGame.getCurrentRoundCount());
+            } else {
+                winnerText = Messages.get("roundwins", winner.getName(), quizGame.getCurrentRoundCount());
+            }
+            return ok(roundover.render(quizGame, winnerText));
+        }
+    }
+
+    @Security.Authenticated(QuizSecurity.class)
+    public static Result newRound() {
+        String username = session("username");
+        QuizGame quizGame = (QuizGame) Cache.get(username + "Game");
+        quizGame.startNewRound();
+        return ok(quiz.render(quizGame));
+    }
+
+    @Security.Authenticated(QuizSecurity.class)
     public static Result index() {
         /*if(categories == null) {
             QuizFactory factory = PlayQuizFactory.init();

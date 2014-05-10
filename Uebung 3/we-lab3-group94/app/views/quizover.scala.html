@@ -1,5 +1,4 @@
-@(quizGame: SimpleQuizGame)
-
+@(quizGame: at.ac.tuwien.big.we14.lab2.api.QuizGame, winnerText : String)
 
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
@@ -7,9 +6,9 @@
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Business Informatics Group Quiz - @Messages("gameEnd")</title>
-        <link rel="stylesheet" type="text/css" href="style/screen.css" />
-        <script src="js/jquery.js" type="text/javascript"></script>
-        <script src="js/framework.js" type="text/javascript"></script>
+        <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/main.css")" />
+        <script src="@routes.Assets.at("javascripts/jquery-1.9.0.min.js")" type="text/javascript"></script>
+        <script src="@routes.Assets.at("javascripts/framework.js")" type="text/javascript"></script>
     </head>
     <body id="winnerpage">
         <a class="accessibility" href="#roundwinner">@Messages("jumpScore")</a>
@@ -17,44 +16,44 @@
         <nav role="navigation" aria-labelledby="navheading">
             <h2 id="navheading" class="accessibility">@Messages("navigation")</h2>
             <ul>
-                <li><a id="logoutlink" title="Klicke hier um dich abzumelden" href="#" accesskey="l">@Messages("logout")</a></li>
+                <li><a id="logoutlink" title="Klicke hier um dich abzumelden" href="@routes.Application.logout()" accesskey="l">@Messages("logout")</a></li>
             </ul>
         </nav>
-        
+
         <section role="main">
-            <!-- winner message -->
+                <!-- winner message -->
             <section id="roundwinner" aria-labelledby="roundwinnerheading">
                 <h2 id="roundwinnerheading" class="accessibility">@Messages("finalscore")</h2>
-                <p class="roundwinnermessage">@quizGame.getWinner() @Messages("wins")!</p>
+                <p class="roundwinnermessage">@winnerText</p>
             </section>
-        
-            <!-- round info -->    
+
+                <!-- round info -->
             <section id="roundinfo" aria-labelledby="roundinfoheading">
                 <h2 id="roundinfoheading" class="accessibility">@Messages("playerinfo")</h2>
                 <div id="player1info" class="playerinfo">
-                    <span id="player1name" class="playername">@Messages("player1")</span>
+                    <span id="player1name" class="playername">@quizGame.getPlayers.get(0).getName()</span>
                     <p id="player1roundcounter" class="playerroundcounter">@Messages("gamesWon") <span id="player1wonrounds" class="playerwonrounds">@quizGame.getWonRounds(quizGame.getPlayers().get(0))</span></p>
                 </div>
                 <div id="player2info" class="playerinfo">
-                    <span id="player2name" class="playername">@Messages("player2")</span>
+                    <span id="player2name" class="playername">@quizGame.getPlayers.get(1).getName()</span>
                     <p id="player2roundcounter" class="playerroundcounter">@Messages("gamesWon") <span id="player2wonrounds" class="playerwonrounds">@quizGame.getWonRounds(quizGame.getPlayers().get(1))</span></p>
                 </div>
-                <a id="next" href="question.html" accesskey="n">@Messages("newGame")</a>
+                <a id="next" href="@routes.QuizController.startGame()" accesskey="n">@Messages("newGame")</a>
             </section>
         </section>
-       
-        <!-- footer -->
+
+            <!-- footer -->
         <footer role="contentinfo">© 2014 BIG Quiz</footer>
 
-         <script type="text/javascript">
-            //<![CDATA[
-	            $(document).ready(function(){
-	         	   if(supportsLocalStorage()){
-	         		   localStorage["lastGame"] = new Date().getTime();
-	         	   }
-	            });
-            //]]>
+        <script type="text/javascript">
+        //<![CDATA[
+        $(document).ready(function(){
+            if(supportsLocalStorage()){
+               localStorage["lastGame"] = new Date().getTime();
+            }
+        });
+        //]]>
         </script>
 
-   </body>
+    </body>
 </html>
