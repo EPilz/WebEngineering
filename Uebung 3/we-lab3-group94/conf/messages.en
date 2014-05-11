@@ -37,6 +37,8 @@ firstname = First name:
 lastname = Last name:
 birthdate = Birthdate:
 gender = Gender:
+female = Female
+male = Male
 loginData = Login Data
 
 startQuiz = Start Quiz

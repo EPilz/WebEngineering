@@ -29,7 +29,7 @@
                     @helper.inputText(form("firstname"), 'id -> "firstname", '_label -> Messages("firstname"))
                     @helper.inputText(form("lastname"), 'id -> "lastname", '_label -> Messages("lastname"))
 
-                    @helper.inputDate(form("birthdate"), 'id -> "birthdate", '_error -> Messages("birthdateFormat"), '_label -> Messages("birthdate"))(dateInput, implicitly[Lang])
+                    @helper.inputDate(form("birthdate"), 'id -> "birthdate", '_showConstraints -> false, '_error -> Messages("birthdateFormat"), '_label -> Messages("birthdate"))(dateInput, implicitly[Lang])
 
                     @helper.select(form("gender"), options = Gender.values().toList.map(v => (v.toString, v.text())), '_label -> Messages("gender"))
                 </fieldset>

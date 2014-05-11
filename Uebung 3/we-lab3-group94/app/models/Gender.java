@@ -1,13 +1,14 @@
 package models;
 
+import play.i18n.Messages;
 import scala.collection.Seq;
 
 /**
  * Created by Elisabeth on 03.05.2014.
  */
 public enum Gender {
-    FEMALE("Weiblich"),
-    MALE("Männlich");
+    FEMALE(Messages.get("female")),
+    MALE(Messages.get("male"));
 
     String text;
 

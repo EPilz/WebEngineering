@@ -28,6 +28,7 @@ public class User {
 
     private String lastname;
 
+    @Formats.DateTime(pattern = "dd.MM.yyyy")
     @Temporal(TemporalType.DATE)
     private Date birthdate;
 

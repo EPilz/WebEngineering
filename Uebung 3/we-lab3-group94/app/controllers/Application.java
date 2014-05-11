@@ -88,7 +88,6 @@ public class Application extends Controller {
                     }
                 }
                 if(date == null) {
-                    System.out.println("date null asdfkaölsd");
                     throw new ParseException(Messages.get("birthdateFormat"), 0);
                 }
                 return date;
