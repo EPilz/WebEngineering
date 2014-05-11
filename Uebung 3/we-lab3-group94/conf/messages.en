@@ -29,7 +29,7 @@ toLong.password = Your password must not contain more than 8 characters!
 requiredFields = Fields marked with a "*" are required
 
 passwordUsernameWrong = Username or Password wrong!
-usernameAlreadyExists = Benutzername ist already exists!
+usernameAlreadyExists = Username already exists!
 birthdateFormat = Please use the following date format: dd.mm.yyyy (z.B. 24.12.2012).
 
 personalData = Personal Data
