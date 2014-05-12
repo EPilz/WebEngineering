@@ -34,7 +34,6 @@ public class Application extends Controller {
     @Transactional
     public static Result login() {
         Form<User> formUser = Form.form(User.class).bindFromRequest();
-        System.out.println(formUser);
         if (formUser.hasErrors()) {
             return badRequest(authentication.render(formUser));
         } else {
