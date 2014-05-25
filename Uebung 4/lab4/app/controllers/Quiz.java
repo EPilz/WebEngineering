@@ -1,5 +1,7 @@
 package controllers;
 
+import highscore.Failure;
+import highscore.PostOnHighScoreBoard;
 import models.*;
 import play.Logger;
 import play.Play;
@@ -40,7 +42,7 @@ public class Quiz extends Controller {
 	private static QuizGame createNewGame() {
 		List<Category> allCategories = QuizDAO.INSTANCE.findEntities(Category.class);
 		Logger.info("Start game with " + allCategories.size() + " categories.");
-		QuizGame game = new QuizGame(allCategories);
+		QuizGame game = new QuizGame(allCategories, user());
 		game.startNewRound();
 		cacheGame(game);
 		return game;
@@ -160,6 +162,7 @@ public class Quiz extends Controller {
 	public static Result endResult() {
 		QuizGame game = cachedGame();
 		if (game != null && isGameOver(game)) {
+            postOnHighScoreBoard();
 			return ok(quizover.render(game));
 		} else {
 			return badRequest(Messages.get("quiz.no-end-result"));
@@ -203,4 +206,14 @@ public class Quiz extends Controller {
 		return Play.application().getWrappedApplication();
 	}
 
+    private static void postOnHighScoreBoard() {
+        try {
+            String uuid = PostOnHighScoreBoard.create().post(cachedGame());
+            Logger.info("uuid: " + uuid);
+            session("uuid", uuid);
+        } catch (Failure failure) {
+            Logger.error(failure.getMessage());
+            Logger.error("Error posting on Highscoreboard!\n" + failure.getMessage() + "\n\n");
+        }
+    }
 }
