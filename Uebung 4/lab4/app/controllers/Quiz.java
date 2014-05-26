@@ -15,15 +15,14 @@ import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
 import scala.Option;
+import twitter.TwitterClientImpl;
+import twitter.TwitterStatusMessage;
 import views.html.quiz.index;
 import views.html.quiz.quiz;
 import views.html.quiz.quizover;
 import views.html.quiz.roundover;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 @Security.Authenticated(Secured.class)
 public class Quiz extends Controller {
@@ -163,7 +162,8 @@ public class Quiz extends Controller {
 		QuizGame game = cachedGame();
 		if (game != null && isGameOver(game)) {
             postOnHighScoreBoard();
-			return ok(quizover.render(game));
+            String message = tweet();
+			return ok(quizover.render(game, message));
 		} else {
 			return badRequest(Messages.get("quiz.no-end-result"));
 		}
@@ -215,5 +215,32 @@ public class Quiz extends Controller {
             Logger.error(failure.getMessage());
             Logger.error("Error posting on Highscoreboard!\n" + failure.getMessage() + "\n\n");
         }
+    }
+
+    private static String tweet() {
+        String uuid = session("uuid");
+        if (uuid != null) {
+            QuizUser user = cachedGame().getPlayers().get(0);
+            String name = user.getFirstName() + " " + user.getLastName();
+            if(name.equals(" ")) {
+                name = user.getName();
+            }
+
+            TwitterStatusMessage message = new TwitterStatusMessage(name, uuid, new Date());
+            TwitterClientImpl twitterClient = new TwitterClientImpl();
+
+            try {
+                twitterClient.publishUuid(message);
+                Logger.info("tweet successful...");
+                Logger.info(message.getTwitterPublicationString());
+                return Messages.get("uuid") + " " + uuid + " " + Messages.get("uuidMessage");
+            } catch (Exception e) {
+                Logger.error("cannot tweet...");
+                Logger.error(e.getMessage());
+            }
+        } else {
+            Logger.error("uuid is null");
+        }
+        return Messages.get("uuidError");
     }
 }

@@ -9,8 +9,8 @@ import java.util.Collections;
 import java.util.List;
 
 public class QuizGame {
-	private static int NUM_ROUNDS = 5;
-	private static int NUM_QUESTIONS = 3;
+	private static int NUM_ROUNDS = 1;
+	private static int NUM_QUESTIONS = 1;
 
 	private List<Round> rounds;
 
