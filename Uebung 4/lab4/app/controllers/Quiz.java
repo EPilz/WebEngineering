@@ -126,7 +126,7 @@ public class Quiz extends Controller {
 	}
 
 	private static Result redirectAccordingToGameState(QuizGame game) {
-		if (isRoundOver(game)) {
+        if (isRoundOver(game)) {
 			return redirect(routes.Quiz.roundResult());
 		} else if (isGameOver(game)) {
 			return redirect(routes.Quiz.endResult());
@@ -140,7 +140,7 @@ public class Quiz extends Controller {
 	}
 
 	private static boolean isRoundOver(QuizGame game) {
-		return game.isRoundOver() && !game.isGameOver();
+        return game.isRoundOver() && !game.isGameOver();
 	}
 
 	private static void cacheGame(QuizGame game) {
@@ -160,7 +160,7 @@ public class Quiz extends Controller {
 	@play.db.jpa.Transactional(readOnly = true)
 	public static Result endResult() {
 		QuizGame game = cachedGame();
-		if (game != null && isGameOver(game)) {
+        if (game != null && isGameOver(game)) {
             postOnHighScoreBoard();
             String message = tweet();
 			return ok(quizover.render(game, message));
@@ -206,15 +206,17 @@ public class Quiz extends Controller {
 		return Play.application().getWrappedApplication();
 	}
 
-    private static void postOnHighScoreBoard() {
+    private static String postOnHighScoreBoard() {
         try {
             String uuid = PostOnHighScoreBoard.create().post(cachedGame());
             Logger.info("uuid: " + uuid);
             session("uuid", uuid);
+            return uuid;
         } catch (Failure failure) {
             Logger.error(failure.getMessage());
             Logger.error("Error posting on Highscoreboard!\n" + failure.getMessage() + "\n\n");
         }
+        return null;
     }
 
     private static String tweet() {

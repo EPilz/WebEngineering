@@ -1,6 +1,9 @@
 import com.google.common.io.Files;
 import com.google.common.io.InputSupplier;
+import data.DBpediaDataInserter;
 import data.JSONDataInserter;
+import models.Category;
+import models.QuizDAO;
 import play.Application;
 import play.GlobalSettings;
 import play.Logger;
@@ -23,6 +26,17 @@ public class Global extends GlobalSettings {
 		JSONDataInserter.insertData(inputStream);
 		Logger.info("Data from json file '" + file.getName() + "' inserted.");
 	}
+
+    @play.db.jpa.Transactional
+    public static void insertDBpediaData() throws IOException {
+        try {
+            Category category = DBpediaDataInserter.insertCategoryMovie();
+            QuizDAO.INSTANCE.persist(category);
+            Logger.info("insert category movie");
+        } catch (Exception e) {
+            Logger.error("cannot create category movie");
+        }
+    }
 	
 	@play.db.jpa.Transactional
     public void onStart(Application app) {
@@ -32,14 +46,15 @@ public class Global extends GlobalSettings {
 			@Override
 			public Boolean apply() throws Throwable {
 				insertJSonData();
+                insertDBpediaData();
 				return true;
 			}
 			   
 			});
-	} catch (Throwable e) {
-		e.printStackTrace();
-	}
-       
+        } catch (Throwable e) {
+            e.printStackTrace();
+        }
+
     }
 
     public void onStop(Application app) {
