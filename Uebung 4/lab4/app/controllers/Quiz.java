@@ -210,7 +210,6 @@ public class Quiz extends Controller {
         try {
             String uuid = PostOnHighScoreBoard.create().post(cachedGame());
             Logger.info("uuid: " + uuid);
-            session("uuid", uuid);
             return uuid;
         } catch (Failure failure) {
             Logger.error(failure.getMessage());
