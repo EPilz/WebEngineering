@@ -122,15 +122,9 @@ public class QuizJPATest {
     }
 
     @Test
-    public void findAllQuestions() {
-        List<Question> questionList = quizDao.findEntities(Question.class);
-        assertEquals(35, questionList.size());
-    }
-
-    @Test
     public void findAllCategories() {
         List<Category> questionList = quizDao.findEntities(Category.class);
-        assertEquals(5, questionList.size());
+        assertEquals(6, questionList.size());
     }
 
     @Test
